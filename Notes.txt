@@ -1,0 +1,7 @@
+# Usefull for fetching number of occurence for a value.
+series = DataFrame.column
+series.value_counts()
+
+# Get top 3 records with highest frequency
+series.value_counts().head(3)
+
