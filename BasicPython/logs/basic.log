@@ -1,0 +1,31 @@
+2021-09-05 16:58:20,965:INFO:Add: 10 + 5 = 15
+2021-09-05 16:58:20,965:INFO:Sub: 10 - 5 = 5
+2021-09-05 16:58:20,966:INFO:Mul: 10 * 5 = 50
+2021-09-05 16:58:20,966:INFO:Div: 10 / 5 = 2.0
+2021-09-05 17:02:39,206:INFO:Add: 10 + 0 = 10
+2021-09-05 17:02:39,206:INFO:Sub: 10 - 0 = 10
+2021-09-05 17:02:39,206:INFO:Mul: 10 * 0 = 0
+2021-09-05 17:02:39,206:ERROR:Tried divide by Zero
+Traceback (most recent call last):
+  File "/Users/r0p04cj/rahul/Personal/git/Python-Playground/BasicPython/Logging_Basic.py", line 24, in divide
+    result = x / y
+ZeroDivisionError: division by zero
+2021-09-05 17:02:39,207:INFO:Div: 10 / 0 = None
+2021-09-05 17:06:52,417:INFO:Add: 10 + 0 = 10
+2021-09-05 17:06:52,417:INFO:Sub: 10 - 0 = 10
+2021-09-05 17:06:52,417:INFO:Mul: 10 * 0 = 0
+2021-09-05 17:06:52,417:ERROR:Tried divide by Zero
+Traceback (most recent call last):
+  File "/Users/r0p04cj/rahul/Personal/git/Python-Playground/BasicPython/Logging_Basic.py", line 29, in divide
+    result = x / y
+ZeroDivisionError: division by zero
+2021-09-05 17:06:52,418:INFO:Div: 10 / 0 = None
+2021-09-05 17:13:20,524:INFO:Add: 10 + 0 = 10
+2021-09-05 17:13:20,524:INFO:Sub: 10 - 0 = 10
+2021-09-05 17:13:20,525:INFO:Mul: 10 * 0 = 0
+2021-09-05 17:13:20,525:ERROR:Tried divide by Zero
+Traceback (most recent call last):
+  File "/Users/r0p04cj/rahul/Personal/git/Python-Playground/BasicPython/Logging_Basic.py", line 30, in divide
+    result = x / y
+ZeroDivisionError: division by zero
+2021-09-05 17:13:20,525:INFO:Div: 10 / 0 = None

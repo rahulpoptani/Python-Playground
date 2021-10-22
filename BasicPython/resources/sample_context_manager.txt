@@ -1,0 +1,1 @@
+Sample Text by Custom Context Manager
