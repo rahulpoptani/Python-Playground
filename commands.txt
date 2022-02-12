@@ -1,2 +1,0 @@
-conda create --name python-playground python=3.7
-

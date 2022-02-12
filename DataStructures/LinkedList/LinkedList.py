@@ -1,5 +1,4 @@
 from Node import Node
-import time
 
 class LinkedList:
  
@@ -305,16 +304,15 @@ class LinkedList:
         # make last node as first node
         temp.next = self.head
         self.head = temp
-
-
-        
-
-
-
-
-
-
-
-
-
+    
+    def reverse(self):
+        prev = None
+        current = self.head
+        while(current is not None):
+            next = current.next
+            current.next = prev
+            prev = current
+            current = next
+        self.head = prev
+    
 
