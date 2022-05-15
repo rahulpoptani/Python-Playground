@@ -28,10 +28,10 @@ def lengthOfLongestSubstring(s: str) -> int:
                 left += 1
             res.add(x)
     
-    print(f'Length of longest substring from string: {s} is : {maxchar}')
+    print(f'Length of longest substring from string: {s} is : {maxchar} with string: {"".join(res)}')
 
 
+lengthOfLongestSubstring('abcabcbb')
 lengthOfLongestSubstring('pwwkew')
 lengthOfLongestSubstring('bbbbb')
-lengthOfLongestSubstring('abcabcbb')
 lengthOfLongestSubstring('dvdf')

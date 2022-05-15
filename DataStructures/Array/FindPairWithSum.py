@@ -46,5 +46,5 @@ def pairInSortedRotated(arr, n, x):
 
 arr = [11, 15, 6, 8, 9, 10]
 
-print(pairInSortedRotated(arr, len(arr), 16))
+print(pairInSortedRotated(arr, len(arr), 10))
     

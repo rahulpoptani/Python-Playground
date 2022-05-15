@@ -1,17 +1,15 @@
-
 class Stack:
     def __init__(self):
-        self.array = []
+        self.list = []
         self.top = -1
         self.max = 100
     
+    @property
     def isEmpty(self):
-        if self.top == -1: return True
-        else: return False
+        return self.top == -1
     
     def isFull(self):
-        if self.top == self.max - 1: return True
-        else: return False
+        return self.top == self.max - 1
     
     def push(self, data):
         if self.isFull():
@@ -19,16 +17,23 @@ class Stack:
             return
         else:
             self.top += 1
-            self.array.append(data)
+            self.list.append(data)
     
     def pop(self):
-        if self.isEmpty():
+        if self.isEmpty:
             print('Stack Underflow')
             return
         else:
             self.top -= 1
-            return self.array.pop()
+            return self.list.pop()
+    
+    def peek(self):
+        if not self.isEmpty:
+            return self.list[self.top]
+    
+    def size(self):
+        return self.top
     
     def printStack(self):
         if self.top == -1: return
-        print(self.array)
+        print(self.list)

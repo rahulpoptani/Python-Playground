@@ -1,21 +1,9 @@
-from SpecialStack import SpecialStack
-
-ss = SpecialStack()
+from Stack import Stack
 
 
-ss.push(4)
-ss.push(2)
-
-ss.printStack()
-print('Top Element: {}'.format(ss.peek()))
-
-ss.push(1)
-
-print('Min Element: {}'.format(ss.getMin()))
-
-ss.pop()
-
-ss.printStack()
-
-print('Min Element: {}'.format(ss.getMin()))
-
+# Create a stack
+s1 = Stack()
+for _ in range(5):
+    s1.push(_)
+s1.printStack()
+print(f'Peek of Stack: {s1.peek()}')
