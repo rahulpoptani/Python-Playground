@@ -61,7 +61,7 @@ print(dt_now_utc)
 
 # Convert from UTC to my timezone
 
-dt_mine_tz = dt_now.astimezone(pytz.timezone('Asia/Kolkata'))
+dt_mine_tz = dt_now_utc.astimezone(pytz.timezone('Asia/Kolkata'))
 print(dt_mine_tz)
 
 

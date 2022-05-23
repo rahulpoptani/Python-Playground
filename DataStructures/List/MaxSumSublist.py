@@ -16,6 +16,7 @@ def find_max_sum_sublist(lst):
 
 
 print(find_max_sum_sublist([-4,2,-5,1,2,3,6,-5,1]))
+print(find_max_sum_sublist([5,4,-1,7,8]))
 
 # Algorithm Used: Kadane's Algorithm - Dynamic Programming Approach
 # Time Complexity: O(n)

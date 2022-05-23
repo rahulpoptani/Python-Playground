@@ -1,14 +1,21 @@
+# Loan Payment Calculator
+
 import datetime
 import calendar
+import logging
+
+logging.basicConfig(format='%(message)s',level=logging.INFO)
 
 balance = 5000
 interest_rate = 13 * 0.01
 monthly_payment = 500
 
-today = datetime.date.today()
+logging.info("Balace: {} | Interest Rate: {} | Monthly Payment: {}".format(balance, interest_rate, monthly_payment))
 
+today = datetime.date.today()
 days_in_current_month = calendar.monthrange(today.year, today.month)[1] # returns tuple of (month, days)
 days_till_month_end = days_in_current_month - today.day
+
 
 # Payment should start from next month, so we calculate month end and add 1
 start_date = today + datetime.timedelta(days=days_till_month_end+1)
@@ -23,7 +30,7 @@ while balance > 0:
     if balance < 0:
         balance = 0
     
-    print(end_date, balance)
+    logging.info('{} {}'.format(end_date, balance))
     
     days_in_current_month = calendar.monthrange(end_date.year, end_date.month)[1]
     end_date = end_date + datetime.timedelta(days=days_in_current_month)

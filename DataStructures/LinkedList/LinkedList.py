@@ -155,9 +155,9 @@ class LinkedList:
     
     # Reverse Linked List: O(n)
     # 3 pointer approach. Keep track of previous, current and next node in sequence.
-    # Initially previous is null, change currrent pointer which is pointing to next to previous.
+    # Initially previous is null, change current pointer which is pointing to next to previous.
     # The link is broken and now current is pointing to previous.
-    # Move ahead, make prev as current and current as next, and next and next next.
+    # Move ahead, make prev as current and current as next, and next as next next.
     def reverse(self):
         if self.is_empty:
             return False

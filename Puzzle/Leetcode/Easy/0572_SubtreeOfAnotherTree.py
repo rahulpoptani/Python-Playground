@@ -36,5 +36,3 @@ def isSubtree(root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
     if root is None and subRoot is not None:
         return False
     return issame(root, subRoot) or issame(root.left, subRoot) or issame(root.right, subRoot)
-
-

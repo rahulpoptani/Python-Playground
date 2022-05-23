@@ -24,5 +24,3 @@ for num in my_nums_yield:
 my_nums_gen = ( x*x for x in [1,2,3,4,5] ) # this will return generator object
 print(list(my_nums_gen)) # you will lose the performance if you convert to list
 
-# A better example
-

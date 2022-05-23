@@ -7,7 +7,7 @@ def find_second_maximum(lst):
         if x > max_element:
             second_max_element = max_element
             max_element = x
-        elif x > second_max_element:
+        elif x > second_max_element and x < max_element:
             second_max_element = x
     return second_max_element
 

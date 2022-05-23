@@ -1,39 +1,37 @@
 class Stack:
     def __init__(self):
         self.list = []
-        self.top = -1
-        self.max = 100
+        self.ssize = 0
     
+    # Time O(1)
     @property
     def isEmpty(self):
-        return self.top == -1
+        return self.ssize == 0
     
-    def isFull(self):
-        return self.top == self.max - 1
-    
-    def push(self, data):
-        if self.isFull():
-            print('Stack Overflow')
-            return
-        else:
-            self.top += 1
-            self.list.append(data)
-    
-    def pop(self):
-        if self.isEmpty:
-            print('Stack Underflow')
-            return
-        else:
-            self.top -= 1
-            return self.list.pop()
-    
+    # Time O(1)
     def peek(self):
         if not self.isEmpty:
-            return self.list[self.top]
+            return self.list[-1]
     
+    # Time O(1)
     def size(self):
-        return self.top
+        return self.ssize
     
+    # Time O(1)
+    def push(self, value):
+        self.ssize += 1
+        self.list.append(value)
+    
+    # Time O(1)
+    def pop(self):
+        if self.isEmpty: return None
+        self.ssize -= 1
+        return self.list.pop()
+
+    # Time O(n)
     def printStack(self):
-        if self.top == -1: return
-        print(self.list)
+        if self.size == 0: return None
+        print('Stack: {}'.format(self.list))
+
+    def __repr__(self):
+        return str(self.list)

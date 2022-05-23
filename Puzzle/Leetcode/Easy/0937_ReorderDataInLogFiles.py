@@ -35,8 +35,8 @@ def reorderLogFiles(logs: List[str]) -> List[str]:
     
     alpha.sort(key=lambda x: (x.split()[1],x.split()[0]))
     
-    # print(alpha)
-    # print(digit)
+    print(alpha)
+    print(digit)
 
     alpha.extend(digit)
     
@@ -46,5 +46,5 @@ def reorderLogFiles(logs: List[str]) -> List[str]:
 ll1 = ["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"]
 print(reorderLogFiles(ll1))
 
-ll2 = ["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]
-print(reorderLogFiles(ll2))
+# ll2 = ["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]
+# print(reorderLogFiles(ll2))

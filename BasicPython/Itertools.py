@@ -45,15 +45,14 @@ letters = ['a', 'b', 'c', 'd']
 numbers = [0, 1, 2, 3]
 names = ['Corey', 'Nicole']
 
-# result = itertools.combinations(letters, 2) # works all combination like a,b but not b,a
-result = itertools.permutations(letters, 2) # view all permutations like a,b and b,a
+result = itertools.combinations(letters, 2) # works all combination like a,b but not b,a
+# result = itertools.permutations(letters, 2) # view all permutations like a,b and b,a
 
 for item in result:
     # print(item)
     pass
 
-# Create a 4 digit code
-# Product function will allow repeat
+# Create a 4 digit code Product function will allow repeat
 
 result = itertools.product(numbers, repeat=4)
 
@@ -74,7 +73,7 @@ for item in result:
 
 # chaining multiple list together
 
-# combined = letters +  numbers + names
+# combined = letters + numbers + names
 combined = itertools.chain(letters +  numbers + names)
 
 for item in combined:
@@ -112,6 +111,7 @@ def lt_2(n):
 
 import operator
 numbers1 = [1,2,3,4]
+
 # Running total
 result = itertools.accumulate(numbers1, operator.add)
 for item in result:
@@ -156,8 +156,4 @@ for state, group in person_group:
     print(state)
     for people in group:
         print(people)
-    print()    
-
-
-
-
+        pass

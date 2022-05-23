@@ -28,3 +28,4 @@ def maxSubArray(nums: List[int]) -> int:
 print(maxSubArray([-2,1,-3,4,-1,2,1,-5,4]))
 print(maxSubArray([1]))
 print(maxSubArray([5,4,-1,7,8]))
+print(maxSubArray([-4,2,-5,1,2,3,6,-5,1]))
