@@ -54,7 +54,7 @@ def findMin2(arr, low, high):
         else:
             high = mid
             print('New High From Mid: {} ({})'.format(high, arr[high]))
-    return arr[high]
+    return arr[mid]
 
 
 

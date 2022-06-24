@@ -4,7 +4,6 @@
 
 from Stack import Stack
 from typing import List
-import sys
 
 # Brute Force O(n square)
 def next_greatest_element(lst:List):

@@ -1,5 +1,3 @@
-from dataclasses import dataclass
-
 
 class BinarySearchTreeNode:
     def __init__(self, data):

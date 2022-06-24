@@ -21,7 +21,5 @@ def wrap(string, max_width):
     wrapList = textwrap.wrap(string, max_width)
     return '\n'.join(wrapList)
 
-if __name__ == '__main__':
-    string, max_width = input(), int(input())
-    result = wrap(string, max_width)
-    print(result)
+print(wrap('ABCDEFGHIJKLIMNOQRSTUVWXYZ',3))
+

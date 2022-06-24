@@ -16,9 +16,7 @@ def lengthOfLongestSubstring(s: str) -> int:
     res = set()
     left = 0
     maxchar = 0
-
-    for x in s:
-        
+    for x in s:    
         if x not in res:
             res.add(x)
             maxchar = max(maxchar, len(res))
