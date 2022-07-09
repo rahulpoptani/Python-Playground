@@ -19,7 +19,7 @@ def max_min(lst):
         maxIndex += 2
         minIndex += 2
     if len(lst) % 2 == 1:
-        res.append(lst[ math.floor(len(lst)/2) ])
+        res.append(lst[ len(lst)//2 ])
     return res
 
 

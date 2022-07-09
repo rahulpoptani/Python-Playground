@@ -1,5 +1,5 @@
 # Given an array of size n and multiple values around which we need to left rotate the array.
-#  How to quickly find multiple left rotations?
+# How to quickly find multiple left rotations?
 
 # Step 1: Copy the entire array two times in temp[0..2n-1] array. 
 # Step 2: Starting position of array after k rotations in temp[] will be k % n. We do k 
