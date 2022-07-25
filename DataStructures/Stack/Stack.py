@@ -35,3 +35,11 @@ class Stack:
 
     def __repr__(self):
         return str(self.list)
+    
+    # important method. Internally Used in Binary Tree traversal
+    def __len__(self):
+        return len(self.list)
+
+    def __iter__(self):
+        while len(self) > 0:
+            yield self.pop()

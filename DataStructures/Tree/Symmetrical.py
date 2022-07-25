@@ -2,11 +2,7 @@
 A Tree is considered symmetrical when mirror image of left subree is equal to right subtree
 '''
 
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.left = None
-        self.right = None
+from Node import Node
 
 def are_symmetric(root1: Node, root2: Node):
     if root1 is None and root2 is None: 
