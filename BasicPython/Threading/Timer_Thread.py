@@ -1,7 +1,6 @@
 # If we want a thread to start executing our code after a time limit has expired.
 
 import threading
-import time 
 
 def task(argument):
     print(f'This will run after configured seconds: dummy argument: {argument}')
