@@ -24,7 +24,10 @@ def task(condition, work_list):
     # notify a waiting thread that the work is done
     print('Thread sending notification...')
     with condition:
+        # we cannot specify which thread to notify
         condition.notify()
+        # condition.notify(n=3) # notify 3 waiting threads
+        # condition.notify_all() # noify all waiting threads
 
 # create condition
 condition = Condition()
@@ -37,11 +40,16 @@ work_list = list()
 # waiting in the main thread, then it is possible for the new thread to execute 
 # and notify before the main thread has had a chance to start waiting. 
 # In which case the main thread would wait forever to be notified.
+print('Main thread waiting for data...')
 with condition:
     # start new thread and perform the task
+    # Important: Start new thread only after aquiring mutex lock (condition)
+    # This case is different: main is waiting for notification. If it was reverse, threads are waiting for notification than thread can be creation outside condition
     worker = Thread(target=task, args=(condition, work_list))
     worker.start()
     # wait to be notified
     condition.wait()
+    # alternate wait
+    # condition.wait(timeout=2) # will wait only till configured seconds
 # we know the data is ready
 print(f'Got data {work_list}')
