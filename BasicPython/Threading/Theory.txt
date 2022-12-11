@@ -1,0 +1,49 @@
+Blocking Function Call:
+=============================
+
+There are many examples of blocking function calls in concurrent programming.
+
+Common examples include:
+
+    Waiting for a lock, e.g. calling acquire() on a threading.Lock.
+    Waiting to be notified, e.g. calling wait() on a threading.Condition.
+    Waiting for a thread to terminate, e.g. calling join() on a threading.Thread.
+    Waiting for a semaphore, e.g. calling acquire() on a threading.Semaphore.
+    Waiting for an event, e.g. calling wait() on a threading.Event.
+    Waiting for a barrier, e.g. calling wait() on a threading.Barrier
+
+Race Condition With Timing:
+==============================
+
+When using threading.Condition, you must aquire the condition before you can call wait() or notify(),
+then release it once you are done.
+First thread will do some work and wait() for another thread to notify()
+Important: The notification from the second thread must be sent after the first thread
+has started waiting. If the first thread calls wait() after the second thread notify(), then it will NOT be notified and will wait foreever.
+This may happen if there is a context switch by the operating system that allows the 
+second thread that calls notify() to run before the first thread that calls wait() to run
+
+To fix the race condition one common approach is to have the waiting threads signal 
+that they are ready before the notifying thread starts its work and calls notify.
+This can be achieved with a threading.Event, which is like a thread-safe boolean flag variable.
+
+# wait to be notified
+with condition:
+    # indicate we are ready to be notified
+    event.set()
+    # wait to be notified
+    condition.wait()
+
+It ensures we avoid fixing the timing race condition by introducing a 
+second timing race condition. Specifically between one thread setting the 
+flag and another waiting on the flag to be set.
+
+The notifying thread can then wait for the waiting thread to signal that it is ready before doing its work, such as changing state, and notifying the waiting thread.
+This can be achieved using busy waiting. That is, a type of waiting where we check for the event flag to be set in a loop.
+To lessen the computational effort of the busy wait loop, the main thread can sleep for a fraction of a second each iteration.
+
+# busy wait for the new thread to get ready
+while not event.is_set():
+    sleep(0.1)
+
+
