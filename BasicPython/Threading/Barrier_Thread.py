@@ -11,6 +11,11 @@ from random import random
 from threading import Thread
 from threading import Barrier
 
+# Each worker thread performs its work then reaches the barrier and waits, 
+# blocking until all other worker threads and the main thread arrive at the barrier.
+# This keeps the worker threads alive, along with their resource requirements in memory The main thread reaches the barrier and waits for all of the worker threads to complete their work.
+# The main thread reaches the barrier and waits for all of the worker threads to complete their work.
+# Finally, all threads reach the barrier and are free to continue.
 def task(barrier: Barrier, number):
     value = random()*10
     sleep(value)
