@@ -12,6 +12,7 @@ def task():
     ident = threading.get_ident()
     native_id = threading.get_native_id()
     print(f'Name of new thread: {new_thread.name} with identifier: {ident} with OS identifier: {native_id}')
+    print(f'Deamon: {thread.daemon} isAlive: {thread.is_alive()}')
 
 thread = threading.Thread(target=task)
 thread.start()

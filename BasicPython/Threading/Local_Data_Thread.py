@@ -26,8 +26,9 @@ def task(value):
 def task2(value):
     local = threading.local()
     local.values = {value: "ABC"}
+    local.num = value
     sleep(value)
-    print(f'Stored Value: {local.values}')
+    print(f'Stored Value: {local.values} with num: {local.num}')
 
 threading.Thread(target=task2, args=(1,)).start()
 sleep(0.5)

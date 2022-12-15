@@ -47,3 +47,13 @@ while not event.is_set():
     sleep(0.1)
 
 
+
+Threading Anti-Patterns:
+===========================
+
+Relying on GIL
+Assuming Atomic
+Not using Context Manager
+Not using Lock Consistency
+Coordinating Threads with sleep
+
