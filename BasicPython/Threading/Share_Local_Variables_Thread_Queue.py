@@ -18,7 +18,7 @@ def push_in(queue: Queue):
 def pull_out(queue: Queue):
     for _ in range(10):
         time.sleep(1.5)
-        data = queue.get()
+        data = queue.get() # it will get an item from the queue and block if there is no item yet available.
         print(f'Out Queue: {data}')
 
 
