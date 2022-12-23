@@ -10,13 +10,15 @@ from typing import List
 
 # target functions
 def task(condition: Condition, data: List):
-    # block for a moment
+    # Sleep will allow the operating system to context switch to another thread, possibly freeing up a CPU core
     time.sleep(random())
     # wait for data
+    # allows the thread to respond to data changes directly, and/or to notification signals.
     with condition:
+        # While loop should only go inside condition and NOT vice versa or else it will consume too many CPU Cycles
         while True:
             print('Thread waiting on condition')
-            # check the data
+            # check the data manually
             if len(data) > 0:
                 break
             else:

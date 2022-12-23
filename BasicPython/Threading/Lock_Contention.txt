@@ -1,0 +1,64 @@
+Reduce lock contention by reducing the frequency and duration that a lock is used and held.
+Lock contention is a problem that may occur when using mutual exclusion (mutex) locks.
+
+It describes a situation where a lock protects a critical section and multiple threads attempt to acquire the lock at the same time.
+This is a problem because only one thread can acquire a lock, and all other threads must block, and wait for the lock to become available. 
+This is an inefficient use of resources, as those threads could be executing and completing tasks in the application.
+
+High Lock Contention: Many threads competing for the same lock.
+Low Lock Contention: Few threads competing for the same lock.
+Prefer low lock contention over high lock contention.
+
+There are two aspects of using a lock which may influence whether we suffer lock contention.
+They are:
+    How often the lock is used.
+    How long the lock is held.
+For example, the more often a lock is used in a multithreaded application, the more likely there will be contention for the lock among threads.
+Additionally, the longer a lock is held within the application, the more likely that there will be contention for the lock among the threads.
+
+How to Reduce Lock Contention?
+There are two main techniques we can use to address and reduce lock contention in our programs.
+They are:
+    Reduce lock frequency.
+    Reduce lock duration.
+
+If we must suffer some contention for locks in our application, there are two approaches we may use to reduce their effects.
+They are:
+    Block before acquiring the lock.
+    Back-off while waiting for the lock.
+
+
+Reduce Lock Frequency
+=======================
+One approach to reducing lock frequency is by increasing the lock granularity.
+Lock granularity refers to the relationship between the lock and the state and resources it protects.
+    Coarse Lock Granularity: One lock protects many variables.
+    Fine Lock Granularity: One lock protects a few variables.
+
+Two approaches to increasing lock granularity are lock splitting and lock stripping.
+    Lock Splitting: Split a critical section of multiple variables protected by one lock into multiple critical sections per variable each protected by their own lock.
+    Lock Striping: Split a data structure protected by one lock into multiple partitions or stripes each protected by their own lock.
+
+If a variable being protected is a data structure like a list, set, or dictionary, then it may be possible to split up the data structure into sub-structures. Each sub-structure may then be protected by its own lock, reducing contention. This is called lock striping.
+
+
+Block Before Acquiring Lock:
+==============================
+Sometimes some lock contention must be suffered, even after our best efforts to reduce the duration and frequency of the usage of the lock.
+One aspect of lock contention is when many threads attempt to acquire a lock at exactly the same time.
+We may reduce this direct contention by reducing the number of threads that simultaneously attempt to acquire the lock.
+This can be achieved by introducing a small sleep prior to acquiring the lock.
+The interval may be small, much less than a second, such as a random number of a few milliseconds, a few tens of milliseconds or a few hundreds of milliseconds, depending on the application.
+Sleep is a system call that blocks the current thread of execution.
+
+
+Back-Off While Waiting For Lock:
+===================================
+One approach to reducing contention for a lock is to add a back-off.
+If a thread attempts to acquire a lock, rather than block until the lock becomes available, the thread may try to acquire the lock again after some interval of time, called a back-off interval.
+
+
+
+
+
+
