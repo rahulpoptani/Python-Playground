@@ -1,0 +1,9 @@
+Why not aloways use Process instead of Thread. What are the limitations?
+
+1. We may have thousands of threads, but perhaps only tens of processes.
+2. Threads are small and fast, whereas processes are large and slow to create and start.
+3. Threads can share data quickly and directly, whereas processes must pickle and transmit data to each other.
+
+
+
+
