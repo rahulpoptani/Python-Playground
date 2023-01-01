@@ -1,0 +1,84 @@
+https://superfastpython.com/python-asyncio/
+
+Asynchronous programming is a programming paradigm that does not block.
+
+Instead, requests and function calls are issued and executed somehow in the background at some future time. 
+This frees the caller to perform other activities and handle the results of issued calls at a later time when results are available or when the caller is interested.
+
+Asyncio refers to the ability to implement asynchronous programming in Python using coroutines.
+coroutines are the unit of concurrency used in asyncio programs.
+A coroutine is a function that can be suspended and resumed.
+
+Coroutines:
+=============
+Coroutines are a more generalized form of subroutines. Subroutines are entered at one point and exited at another point. Coroutines can be entered, exited, and resumed at many different points.
+
+A coroutine can be defined via the “async def” expression. It can take arguments and return a value, just like a function.
+async def custom_coro()
+Calling a coroutine function will create a coroutine object, this is a new class. It does not execute the coroutine function.
+coro = custom_coro()
+A coroutine can execute another coroutine via the await expression. This suspends the caller and schedules the target for execution.
+await custom_coro()
+
+The “asyncio” module provides functions and objects for developing coroutine-based programs using the asynchronous programming paradigm.
+
+pecifically, it supports non-blocking I/O with subprocesses (for executing commands) and with streams (for TCP socket programming).
+The event loop is the core of every asyncio application. Event loops run asynchronous tasks and callbacks, perform network IO operations, and run subprocesses.
+
+
+Reasons to Use Asyncio in Python:
+===================================
+1. Use asyncio in order to adopt coroutines in your program.
+2. Use asyncio in order to use the asynchronous programming paradigm.
+3. Use asyncio in order to use non-blocking I/O
+
+Routine:
+==========
+It is a discrete module of expressions that is assigned a name, may take arguments and may return a value.
+A routine has subroutines.
+
+Subroutine:
+============
+A module of instructions that can be executed on demand, typically named, and may take arguments and return a value. also called a function
+
+=====================
+
+When a coroutine executes another coroutine, it must suspend its execution and allow the other coroutine to resume once the other coroutine has completed.
+
+Event Loop
+===========
+The event loop is an environment for executing coroutines in a single thread.
+It does many things, such as:
+    - Execute coroutines.
+    - Execute callbacks.
+    - Perform network input/output.
+    - Run subprocesses.
+
+Why Get Access to The Event Loop?
+====================================
+There are many reasons why we may want access to the event loop from outside of a running asyncio program.
+    To monitor the progress of tasks.
+    To issue and get results from tasks.
+    To fire and forget one-off tasks.
+
+An asyncio event loop can be used in a program as an alternative to a thread pool for coroutine-based tasks.
+
+Asyncio task
+=============
+A Task is an object that schedules and independently runs an asyncio coroutine.
+It provides a handle on a scheduled coroutine that an asyncio program can query and use to interact with the coroutine.
+
+A task is created from a coroutine. It requires a coroutine object, wraps the coroutine, schedules it for execution, and provides ways to interact with it.
+
+A task is executed independently. 
+This means it is scheduled in the asyncio event loop and will execute regardless of what else happens in the coroutine that created it. 
+This is different from executing a coroutine directly, where the caller must wait for it to complete.
+
+Because a Task is awaitable it means that a coroutine can wait for a task to be done using the await expression.
+
+
+
+
+
+
+
