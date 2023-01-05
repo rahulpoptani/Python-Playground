@@ -1,16 +1,17 @@
+# how to check for and get an exception from a successfully done task.
+
 import asyncio
 
 async def task_coroutine():
-    print('executing task')
+    print('execuiting the task')
     await asyncio.sleep(1)
-    return 99
 
 async def main():
     print('main coroutine started')
     task = asyncio.create_task(task_coroutine())
-    await asyncio.sleep(0.2)
-    value = task.result()
-    print(f'Result: {value}')
+    await task
+    ex = task.exception()
+    print(f'Exception: {ex}')
     print('main coroutine done')
 
 asyncio.run(main())
