@@ -11,7 +11,7 @@ async def main():
     first_delay = asyncio.create_task(delay(3))
     second_delay = asyncio.create_task(delay(3))
     await hello_every_second()
-    # if we don't await then main corutine will finish first and final result will not be able to come back from couroutine
+    # if we don't await then main coroutine will finish first and final result will not be able to come back from couroutine
     await first_delay
     await second_delay
 
