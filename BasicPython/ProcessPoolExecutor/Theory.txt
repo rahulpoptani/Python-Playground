@@ -1,0 +1,51 @@
+Use ProcessPoolExecutors
+============================
+    Your tasks can be defined by a pure function that has no state or side effects.
+    Your task can fit within a single Python function, likely making it simple and easy to understand.
+    You need to perform the same task many times, e.g. homogeneous tasks.
+    You need to apply the same function to each object in a collection in a for-loop.
+
+Process pools work best when applying the same pure function on a set of different data (e.g. homogeneous tasks, heterogeneous data). This makes code easier to read and debug.
+
+Use Multiple ProcessPoolExecutors
+===================================
+    You need to perform groups of different types of tasks; one process pool could be used for each task type.
+    You need to perform a pipeline of tasks or operations; one process pool can be used for each step.
+
+Process pools can operate on tasks of different types (e.g. heterogeneous tasks), although it may make the organization of your program and debugging easy if a separate process pool is responsible for each task type. 
+
+Don’t Use ProcessPoolExecutors
+================================
+    You have a single task; consider using the Process class with the “target” argument.
+    You have long running tasks, such as monitoring or scheduling; consider extending the Process class.
+    Your task functions require state; consider extending the Process class.
+    Your tasks require coordination; consider using a Process and patterns like a Barrier or Semaphore.
+    Your tasks require synchronization; consider using a Process and Locks.
+    You require a process trigger on an event; consider using the Process class.
+
+The sweet spot for process pools is in dispatching many similar tasks, the results of which may be used later in the program. Tasks that don’t fit neatly into this summary are probably not a good fit for process pools.
+
+Use Processes for IO-Bound Tasks
+==================================
+You can use processes for IO-bound tasks, although threads may be a better fit.
+
+An IO-bound task is a type of task that involves reading from or writing to a device, file, or socket connection.
+
+CPU-Bound Tasks
+=================
+You should probably use processes for CPU-bound tasks.
+
+A CPU-bound task is a type of task that involves performing a computation and does not involve IO.
+
+ProcessPoolExecutor Exception Handling
+========================================
+Exception handling is an important consideration when using processes.
+
+Code will raise an exception when something unexpected happens and the exception should be dealt with by your application explicitly, even if it means logging it and moving on.
+
+There are three points you may need to consider exception handling when using the ProcessPoolExecutor; they are:
+
+    Exception Handling During Process Initialization
+    Exception Handling During Task Execution
+    Exception Handling During Task Completion Callbacks
+

@@ -21,3 +21,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# Note: Callback execute when the function is exit, cancelled or exception
