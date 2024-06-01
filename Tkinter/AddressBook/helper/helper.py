@@ -28,10 +28,14 @@ class Helper:
             except Exception as e:
                 print(e)
     
+    
+    
 
 # Helper.executeQuery('DROP TABLE PEOPLE')
 # Helper.dataBootstrap()
-# query = 'INSERT INTO PEOPLE (FNAME, LNAME, EMAIL, PHONE, ADDRESS) VALUES (?, ?, ?, ?, ?)'
+
+
+# 
 # Helper.executeQuery(query, ('Fname1','Lname1', 'fname1lname1@gmail.com', '0001', 'loc1'))
 # Helper.executeQuery(query, ('Fname2','Lname2', 'fname2lname2@gmail.com', '0002', 'loc2'))
 # Helper.executeQuery(query, ('Fname3','Lname3', 'fname3lname3@gmail.com', '0003', 'loc3'))

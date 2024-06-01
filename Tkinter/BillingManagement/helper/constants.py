@@ -1,7 +1,7 @@
 class Constants:
-    BUTTON_FONT = 'arial 12 bold'
-    BUTTON_HEIGHT = 50
-    BUTTON_WIDTH = 50
+    BIG_BUTTON_FONT = 'arial 12 bold'
+    BIG_BUTTON_HEIGHT = 50
+    BIG_BUTTON_WIDTH = 50
     DEFAULT_PADDING_FROM_BORDER = 10
 
     HEADING_FONT = 'arial 18 bold'
@@ -9,3 +9,11 @@ class Constants:
 
     TOPFRAME_BG = '#385170'
     BOTTOMFRAME_BG = 'White'
+
+    LISTBOX_FONT = 'arial 16'
+
+    OPTION_BUTTON_FONT = 'arial 12'
+    
+    ENTRY_FONT = 'arial 12'
+
+    DB_TABLE_ITEMS = 'items'
