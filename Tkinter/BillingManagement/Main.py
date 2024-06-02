@@ -1,5 +1,5 @@
 from tkinter import *
-from helper import Helper
+from Helper import Helper
 from Constants import Constants
 from Inventory import Inventory
 from Order import Order

@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 import sqlite3
-from helper import Helper
+from Helper import Helper
 from Constants import Constants
 
 class Inventory(Toplevel):
