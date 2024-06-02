@@ -2,8 +2,8 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 import sqlite3
-from helper.helper import Helper
-from helper.constants import Constants
+from helper import Helper
+from Constants import Constants
 
 class Inventory(Toplevel):
     def __init__(self):
@@ -19,15 +19,15 @@ class Inventory(Toplevel):
         self.topFrame = LabelFrame(self, text='', bg=Constants.TOPFRAME_BG)
         self.topFrame.pack(side=TOP, fill=BOTH, padx=10, pady=10)
 
-        self.backImage = Helper.getImage('back.png')
+        self.backImage = Helper.getImage('IMG_Back.png')
         self.backButton = Button(self.topFrame, text='Back', image=self.backImage, height=Constants.BIG_BUTTON_HEIGHT, font=Constants.BIG_BUTTON_FONT, compound=LEFT, command=self.destroy)
         self.backButton.pack(side=LEFT, padx=10, pady=10, anchor=NE)
 
-        self.backupImage = Helper.getImage('backup.png')
+        self.backupImage = Helper.getImage('IMG_Backup.png')
         self.backupButton = Button(self.topFrame, text='Backup', image=self.backupImage, height=Constants.BIG_BUTTON_HEIGHT, font=Constants.BIG_BUTTON_FONT, compound=LEFT)
         self.backupButton.pack(side=RIGHT, padx=10, pady=10, anchor=NW)
         
-        self.restoreImage = Helper.getImage('restore.png')
+        self.restoreImage = Helper.getImage('IMG_Restore.png')
         self.restoreButton = Button(self.topFrame, text='Restore', image=self.restoreImage, height=Constants.BIG_BUTTON_HEIGHT, font=Constants.BIG_BUTTON_FONT, compound=LEFT)
         self.restoreButton.pack(side=RIGHT, padx=10, pady=10, anchor=NW)
 

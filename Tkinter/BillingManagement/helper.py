@@ -1,15 +1,15 @@
 from tkinter import *
 import sqlite3
-from helper.constants import Constants
+from Constants import Constants
 # from constants import Constants
 
 class Helper:
     def getImage(name: str) -> PhotoImage:
-        return PhotoImage(file=f'BillingManagement/icons/{name}')
+        return PhotoImage(file=f'{name}')
     
     def dataBootstrap():
         print('Data Bootstrapping Started')
-        with sqlite3.connect('BillingManagement/helper/database.db') as con:
+        with sqlite3.connect('./database.db') as con:
             cur = con.cursor()
             res = cur.execute(f"SELECT * FROM SQLITE_MASTER WHERE TBL_NAME = '{Constants.DB_TABLE_ITEMS}'")
             if len(res.fetchall()) == 0:
@@ -21,7 +21,7 @@ class Helper:
         print('Data Bootstrapping Finished')
     
     def executeQuery(query, args = ()):
-        with sqlite3.connect('BillingManagement/helper/database.db') as con:
+        with sqlite3.connect('./database.db') as con:
             cur = con.cursor()
             if args: return cur.execute(query, args).fetchall()
             else: return cur.execute(query).fetchall()
@@ -32,7 +32,7 @@ class Helper:
             #     print(er.args) 
     
     def getDBCursor():
-        connection = sqlite3.connect('BillingManagement/helper/database.db')
+        connection = sqlite3.connect('./database.db')
         cursor = connection.cursor()
         return cursor
     

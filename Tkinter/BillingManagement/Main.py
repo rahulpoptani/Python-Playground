@@ -1,8 +1,8 @@
 from tkinter import *
-from helper.helper import Helper
-from helper.constants import Constants
-from inventory import Inventory
-from order import Order
+from helper import Helper
+from Constants import Constants
+from Inventory import Inventory
+from Order import Order
 
 class Main(object):
     def __init__(self, master: Tk) -> None:
@@ -19,11 +19,11 @@ class Main(object):
         mainFrame.pack()
 
         # Create Buttons
-        self.inventoryImage = Helper.getImage('Inventory.png')
+        self.inventoryImage = Helper.getImage('IMG_Inventory.png')
         inventoryButton = Button(mainFrame, text='Inventory', compound=LEFT, bg='white', image=self.inventoryImage, font=Constants.BIG_BUTTON_FONT, command=self.openInventory)
         inventoryButton.place(relx=0.39, rely=0.4, anchor=CENTER, relwidth=0.2, relheight=0.2)
         
-        self.orderImage = Helper.getImage('Order.png')
+        self.orderImage = Helper.getImage('IMG_Order.png')
         orderButton = Button(mainFrame, text='Order', compound=LEFT, bg='white', image=self.orderImage, font=Constants.BIG_BUTTON_FONT, command=self.openOrder)
         orderButton.place(relx=0.61, rely=0.4, anchor=CENTER, relwidth=0.2, relheight=0.2)
                 
