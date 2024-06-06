@@ -1,7 +1,9 @@
 from tkinter import *
 from tkinter import ttk
-from tkinter import messagebox
+from tkinter import messagebox, filedialog
 import sqlite3
+import pandas as pd
+from datetime import datetime
 from Helper import Helper
 from Constants import Constants
 
@@ -24,11 +26,11 @@ class Inventory(Toplevel):
         self.backButton.pack(side=LEFT, padx=10, pady=10, anchor=NE)
 
         self.backupImage = Helper.getImage('IMG_Backup.png')
-        self.backupButton = Button(self.topFrame, text='Backup', image=self.backupImage, height=Constants.BIG_BUTTON_HEIGHT, font=Constants.BIG_BUTTON_FONT, compound=LEFT)
+        self.backupButton = Button(self.topFrame, text='Backup', image=self.backupImage, height=Constants.BIG_BUTTON_HEIGHT, font=Constants.BIG_BUTTON_FONT, compound=LEFT, command=self.backupInventory)
         self.backupButton.pack(side=RIGHT, padx=10, pady=10, anchor=NW)
         
         self.restoreImage = Helper.getImage('IMG_Restore.png')
-        self.restoreButton = Button(self.topFrame, text='Restore', image=self.restoreImage, height=Constants.BIG_BUTTON_HEIGHT, font=Constants.BIG_BUTTON_FONT, compound=LEFT)
+        self.restoreButton = Button(self.topFrame, text='Restore', image=self.restoreImage, height=Constants.BIG_BUTTON_HEIGHT, font=Constants.BIG_BUTTON_FONT, compound=LEFT, command=self.restoreInventory)
         self.restoreButton.pack(side=RIGHT, padx=10, pady=10, anchor=NW)
 
         # Bottom Left Frame
@@ -43,14 +45,12 @@ class Inventory(Toplevel):
         self.style.configure('Treeview.Heading', font=Constants.LISTBOX_FONT)
         self.style.configure('Treeview', font=Constants.LISTBOX_FONT, rowheight=30)
 
-        self.itemTView = ttk.Treeview(self.bottomLeftTopFrame, columns=(1,2,3), show='headings')
+        self.itemTView = ttk.Treeview(self.bottomLeftTopFrame, columns=(1,2), show='headings')
         self.itemTView.pack(padx=10, pady=10, fill=BOTH, expand=True)
         self.itemTView.heading(1, text='Item')
         self.itemTView.heading(2, text='Price')
-        self.itemTView.heading(3, text='Quantity')
         self.itemTView.column(1, anchor=CENTER)
         self.itemTView.column(2, anchor=CENTER)
-        self.itemTView.column(3, anchor=CENTER)
         self.itemTView.bind('<Double 1>', self.getSelectedItem)
 
         self.loadTreeView()
@@ -59,39 +59,62 @@ class Inventory(Toplevel):
         self.bottomLeftBottomFrame = LabelFrame(self.bottomLeftFrame, text='Add / Update')
         self.bottomLeftBottomFrame.pack(padx=10, pady=10, side=TOP, fill=BOTH)
 
+        self.itemNameLabel = Label(self.bottomLeftBottomFrame, text='Item:', font=Constants.ENTRY_FONT)
+        self.itemNameLabel.pack(side=LEFT, padx=10, pady=10)
         self.itemNameEntry = Entry(self.bottomLeftBottomFrame, font=Constants.ENTRY_FONT)
         self.itemNameEntry.pack(side=LEFT, padx=10, pady=10, fill=X, expand=True)
 
+        self.itemPriceLabel = Label(self.bottomLeftBottomFrame, text='Price:', font=Constants.ENTRY_FONT)
+        self.itemPriceLabel.pack(side=LEFT, padx=10, pady=10)
         self.itemPrice = Entry(self.bottomLeftBottomFrame, font=Constants.ENTRY_FONT)
         self.itemPrice.pack(side=LEFT, padx=10, pady=10, fill=X, expand=True)
 
-        self.itemQty = Entry(self.bottomLeftBottomFrame, font=Constants.ENTRY_FONT)
-        self.itemQty.pack(side=LEFT, padx=10, pady=10, fill=X, expand=True)
-
         # Error Label
-        self.errorLabel = Label(self.bottomLeftFrame, text='Message: ')
-        self.errorLabel.pack(padx=10, pady=10, side=LEFT, fill=BOTH)
+        # self.errorLabel = Label(self.bottomLeftFrame, text='Message: ')
+        # self.errorLabel.pack(padx=10, pady=10, side=LEFT, fill=BOTH)
 
         # Bottom Right Frame
         self.bottomRightFrame = LabelFrame(self, text='')
         self.bottomRightFrame.pack(padx=(0,10), pady=10, side=RIGHT, fill=BOTH)
         self.bottomRightFrame.bind('<Button 1>', lambda x: self.clearSelection())
 
-        self.searchEntry = Entry(self.bottomRightFrame, font=Constants.ENTRY_FONT)
+        self.searchEntry = Entry(self.bottomRightFrame, font=Constants.ENTRY_FONT, width=50)
         self.searchEntry.insert(0, 'Search Item')
         self.searchEntry.bind('<FocusIn>', lambda x: self.searchEntry.delete(0, END))
         self.searchEntry.bind('<Return>', lambda x: self.updateSearchResults())
         self.searchEntry.pack(padx=10, pady=10, fill=X)
         
-        self.addButton = Button(self.bottomRightFrame, text='Add', font=Constants.OPTION_BUTTON_FONT, command=self.addItem)
+        self.addButton = Button(self.bottomRightFrame, text='Add', font=Constants.OPTION_BUTTON_FONT, height=2, command=self.addItem)
         self.addButton.pack(padx=10, pady=10, fill=X)
         
-        self.updateButton = Button(self.bottomRightFrame, text='Update', font=Constants.OPTION_BUTTON_FONT, command=self.updateItem)
+        self.updateButton = Button(self.bottomRightFrame, text='Update', font=Constants.OPTION_BUTTON_FONT, height=2, command=self.updateItem)
         self.updateButton.pack(padx=10, pady=10, fill=X)
         
-        self.deleteButton = Button(self.bottomRightFrame, text='Delete', font=Constants.OPTION_BUTTON_FONT, command=self.deleteItem)
+        self.deleteButton = Button(self.bottomRightFrame, text='Delete', font=Constants.OPTION_BUTTON_FONT, height=2, command=self.deleteItem)
         self.deleteButton.pack(padx=10, pady=10, fill=X)
         
+    def backupInventory(self):
+        if messagebox.askyesno('Backup', 'Do you want to backup the inventory?'):
+            resultSet = Helper.executeQuery('SELECT NAME, PRICE FROM ITEMS')
+            df = pd.DataFrame(resultSet)
+            filename = f"Inventory_Backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv" 
+            df.to_csv(filename, index=False, header=False)
+            messagebox.showinfo('Backup', message=f'Inventory Backup Completed \n{filename}')
+    
+    def restoreInventory(self):
+        if messagebox.askyesno('Restore', 'Do you want to restore the inventory?'):
+            path = filedialog.askopenfilename(initialdir='./', title='Select A File', filetypes=(("CSV Files", "*.csv"), ("All Files", "*.*")))
+            try:
+                df = pd.read_csv(path, header=None, names=['itemname', 'price'])
+                if len(df.index) > 0:
+                    Helper.executeQuery(f'DELETE FROM {Constants.DB_TABLE_ITEMS}')
+                    for _, row in df.iterrows():
+                        Helper.executeQuery(f'INSERT INTO {Constants.DB_TABLE_ITEMS} (NAME, PRICE) VALUES (?, ?)', (row.itemname, row.price))
+                        self.loadTreeView()
+            except Exception as exe:
+                messagebox.showerror('Error',f'Unable to load file: {path} {exe}')
+
+    
     def updateTreeView(self, resultSet):
         self.itemTView.delete(*self.itemTView.get_children())
         for result in resultSet:
@@ -99,12 +122,12 @@ class Inventory(Toplevel):
     
     def updateSearchResults(self): 
         searchText = self.searchEntry.get()
-        query = f'SELECT NAME, PRICE, QUANTITY FROM ITEMS WHERE LOWER(NAME) LIKE LOWER("%{searchText}%")'
+        query = f'SELECT NAME, PRICE FROM ITEMS WHERE LOWER(NAME) LIKE LOWER("%{searchText}%")'
         resultSet = Helper.executeQuery(query)
         self.updateTreeView(resultSet)
     
     def loadTreeView(self):
-        resultSet = Helper.executeQuery('SELECT NAME, PRICE, QUANTITY FROM ITEMS')
+        resultSet = Helper.executeQuery('SELECT NAME, PRICE FROM ITEMS')
         self.updateTreeView(resultSet)
     
     def getSelectedItem(self, event):
@@ -113,23 +136,19 @@ class Inventory(Toplevel):
         self.itemNameEntry.insert(0, self.currentTreeSelection['values'][0])
         self.itemPrice.delete(0, END)
         self.itemPrice.insert(0, self.currentTreeSelection['values'][1])
-        self.itemQty.delete(0, END)
-        self.itemQty.insert(0, self.currentTreeSelection['values'][2])
     
     def clearSelection(self):
         self.itemNameEntry.delete(0, END)
         self.itemPrice.delete(0, END)
-        self.itemQty.delete(0, END)
         self.itemTView.selection_remove(self.itemTView.selection())
 
     def addItem(self): 
         itemName = self.itemNameEntry.get()
         itemPrice = float(self.itemPrice.get()) if self.itemPrice.get() else None
-        itemQty = int(self.itemQty.get()) if self.itemQty.get() else None
-        if itemName and itemPrice and itemQty:
-            query = f"INSERT INTO {Constants.DB_TABLE_ITEMS} (NAME, PRICE, QUANTITY) VALUES (?, ?, ?)"
+        if itemName and itemPrice:
+            query = f"INSERT INTO {Constants.DB_TABLE_ITEMS} (NAME, PRICE) VALUES (?, ?)"
             try:
-                Helper.executeQuery(query, (itemName, itemPrice, itemQty))
+                Helper.executeQuery(query, (itemName, itemPrice))
                 print(query)
                 self.loadTreeView()
             except sqlite3.IntegrityError as err:
@@ -138,13 +157,13 @@ class Inventory(Toplevel):
     def updateItem(self): 
         itemName = self.itemNameEntry.get()
         itemPrice = float(self.itemPrice.get()) if self.itemPrice.get() else None
-        itemQty = int(self.itemQty.get()) if self.itemQty.get() else None
-        if itemName and itemPrice and itemQty:
-            query = f"UPDATE {Constants.DB_TABLE_ITEMS} SET NAME = '{itemName}', PRICE = {itemPrice}, QUANTITY = {itemQty} WHERE NAME = '{self.currentTreeSelection['values'][0]}'"
+        if itemName and itemPrice:
+            query = f"UPDATE {Constants.DB_TABLE_ITEMS} SET NAME = '{itemName}', PRICE = {itemPrice} WHERE NAME = '{self.currentTreeSelection['values'][0]}'"
             try:
                 Helper.executeQuery(query)
                 print(query)
                 self.loadTreeView()
+                self.clearSelection()
             except sqlite3.IntegrityError as err:
                 messagebox.showerror('Error', 'Item already in database', icon='error')
             
@@ -154,15 +173,13 @@ class Inventory(Toplevel):
             response = messagebox.askquestion('Delete', f'Are you sure you want to delete {len(self.itemTView.selection())} records')
             if response == 'yes':
                 for x in self.itemTView.selection():
-                    itemName, _, _ = self.itemTView.item(x)['values']
+                    itemName, _ = self.itemTView.item(x)['values']
                     query = f"DELETE FROM {Constants.DB_TABLE_ITEMS} WHERE NAME = '{itemName}'"
                     print(query)
                     Helper.executeQuery(query)
                 self.clearSelection()
                 self.loadTreeView()
-        
-
-
+    
     def closeWindow(self): self.destroy()
 
 def main():
