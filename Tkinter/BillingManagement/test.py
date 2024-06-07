@@ -1,12 +1,11 @@
-import pandas as pd
+ll = [['Name', 2, 3.3, 'Value'], ['Some', 5, 10.2, 'Thing']]
 
-path = '/media/d/git/Python-Playground/Tkinter/BillingManagement/Inventory_Backup_20240602_215200.csv'
+import json
 
-df = pd.read_csv(path, header=None, names=['itemname', 'price'])
+json_str = json.dumps(ll)
 
-print(df)
-print(df.columns)
+print(type(json_str), json_str)
 
-for index, row in df.iterrows():
-    print(index, row.itemname, row.price)
+json_json = json.loads(json_str)
 
+print(type(json_json), json_json)

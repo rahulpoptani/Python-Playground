@@ -17,3 +17,4 @@ class Constants:
     ENTRY_FONT = 'arial 12'
 
     DB_TABLE_ITEMS = 'items'
+    DB_TABLE_ORDERS = 'orders'

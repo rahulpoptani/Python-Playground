@@ -8,6 +8,7 @@ from Helper import Helper
 from Constants import Constants
 
 class Inventory(Toplevel):
+    CURR_DIR = '/'.join(__file__.split('/')[:-1])
     def __init__(self):
         Toplevel.__init__(self)
         screenWidth = self.winfo_screenwidth()
@@ -70,8 +71,10 @@ class Inventory(Toplevel):
         self.itemPrice.pack(side=LEFT, padx=10, pady=10, fill=X, expand=True)
 
         # Error Label
-        # self.errorLabel = Label(self.bottomLeftFrame, text='Message: ')
-        # self.errorLabel.pack(padx=10, pady=10, side=LEFT, fill=BOTH)
+        self.errorLabelName = Label(self.bottomLeftFrame, text='Message: ', foreground='Black')
+        self.errorLabelName.pack(padx=10, pady=10, side=LEFT, fill=BOTH)
+        self.errorLabelValue = Label(self.bottomLeftFrame, text='')
+        self.errorLabelValue.pack(pady=10, side=LEFT, fill=BOTH)
 
         # Bottom Right Frame
         self.bottomRightFrame = LabelFrame(self, text='')
@@ -99,7 +102,7 @@ class Inventory(Toplevel):
             df = pd.DataFrame(resultSet)
             filename = f"Inventory_Backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv" 
             df.to_csv(filename, index=False, header=False)
-            messagebox.showinfo('Backup', message=f'Inventory Backup Completed \n{filename}')
+            self.changeErrorLabelValue(f'Inventory Backup Completed! (File: {filename})', 'Green')
     
     def restoreInventory(self):
         if messagebox.askyesno('Restore', 'Do you want to restore the inventory?'):
@@ -110,7 +113,8 @@ class Inventory(Toplevel):
                     Helper.executeQuery(f'DELETE FROM {Constants.DB_TABLE_ITEMS}')
                     for _, row in df.iterrows():
                         Helper.executeQuery(f'INSERT INTO {Constants.DB_TABLE_ITEMS} (NAME, PRICE) VALUES (?, ?)', (row.itemname, row.price))
-                        self.loadTreeView()
+                    self.loadTreeView()
+                    self.changeErrorLabelValue('Inventory Restored!', 'Green')
             except Exception as exe:
                 messagebox.showerror('Error',f'Unable to load file: {path} {exe}')
 
@@ -122,12 +126,12 @@ class Inventory(Toplevel):
     
     def updateSearchResults(self): 
         searchText = self.searchEntry.get()
-        query = f'SELECT NAME, PRICE FROM ITEMS WHERE LOWER(NAME) LIKE LOWER("%{searchText}%")'
+        query = f'SELECT NAME, PRICE FROM ITEMS WHERE LOWER(NAME) LIKE LOWER("%{searchText}%") ORDER BY NAME'
         resultSet = Helper.executeQuery(query)
         self.updateTreeView(resultSet)
     
     def loadTreeView(self):
-        resultSet = Helper.executeQuery('SELECT NAME, PRICE FROM ITEMS')
+        resultSet = Helper.executeQuery('SELECT NAME, PRICE FROM ITEMS ORDER BY NAME')
         self.updateTreeView(resultSet)
     
     def getSelectedItem(self, event):
@@ -141,6 +145,7 @@ class Inventory(Toplevel):
         self.itemNameEntry.delete(0, END)
         self.itemPrice.delete(0, END)
         self.itemTView.selection_remove(self.itemTView.selection())
+        self.errorLabelValue['text'] = ''
 
     def addItem(self): 
         itemName = self.itemNameEntry.get()
@@ -151,8 +156,11 @@ class Inventory(Toplevel):
                 Helper.executeQuery(query, (itemName, itemPrice))
                 print(query)
                 self.loadTreeView()
+                self.changeErrorLabelValue('Item added successfully', 'Green')
             except sqlite3.IntegrityError as err:
-                messagebox.showerror('Error', 'Item already in database', icon='error')
+                self.changeErrorLabelValue('Item already in database', 'Red')
+        else:
+            self.changeErrorLabelValue('Enter Item Name and Price', 'Red')
     
     def updateItem(self): 
         itemName = self.itemNameEntry.get()
@@ -164,13 +172,15 @@ class Inventory(Toplevel):
                 print(query)
                 self.loadTreeView()
                 self.clearSelection()
+                self.changeErrorLabelValue('Item Updated Successfully', 'Green')
             except sqlite3.IntegrityError as err:
                 messagebox.showerror('Error', 'Item already in database', icon='error')
-            
+        else:
+            self.changeErrorLabelValue('Select an Item for Updation (Double Click)', 'Red')
     
     def deleteItem(self):
         if len(self.itemTView.selection()) > 0:
-            response = messagebox.askquestion('Delete', f'Are you sure you want to delete {len(self.itemTView.selection())} records')
+            response = messagebox.askquestion('Delete', f'Are you sure you want to delete {len(self.itemTView.selection())} items')
             if response == 'yes':
                 for x in self.itemTView.selection():
                     itemName, _ = self.itemTView.item(x)['values']
@@ -179,6 +189,13 @@ class Inventory(Toplevel):
                     Helper.executeQuery(query)
                 self.clearSelection()
                 self.loadTreeView()
+                self.changeErrorLabelValue('Item deleted successfully', 'Green')
+        else:
+            self.changeErrorLabelValue('Select one or more Items for Deletion (CTRL + Click for multiple selection)', 'Red')
+    
+    def changeErrorLabelValue(self, message, color):
+        self.errorLabelValue['foreground'] = color
+        self.errorLabelValue['text'] = message
     
     def closeWindow(self): self.destroy()
 

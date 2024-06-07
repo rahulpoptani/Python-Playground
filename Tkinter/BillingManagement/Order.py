@@ -1,9 +1,13 @@
+import json
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox
+from docxtpl import DocxTemplate
+from datetime import datetime
 from Helper import Helper
 from Constants import Constants
 
 class Order(Toplevel):
+    CURR_DIR = '/'.join(__file__.split('/')[:-1])
     def __init__(self):
         Toplevel.__init__(self)
         screenWidth = self.winfo_screenwidth()
@@ -16,13 +20,18 @@ class Order(Toplevel):
         self.topFrame = LabelFrame(self, text='', bg=Constants.TOPFRAME_BG)
         self.topFrame.pack(side=TOP, fill=BOTH, padx=10, pady=10)
 
-        self.backImage = Helper.getImage('IMG_Back.png')
+        self.backImage = Helper.getImage(f'{Order.CURR_DIR}/IMG_Back.png')
         self.backButton = Button(self.topFrame, text='Back', image=self.backImage, height=Constants.BIG_BUTTON_HEIGHT, font=Constants.BIG_BUTTON_FONT, compound=LEFT, command=self.destroy)
-        self.backButton.pack(side=LEFT, padx=10, pady=10, anchor=NE)
+        self.backButton.pack(side=LEFT, padx=10, pady=10)
+        
+        self.orderHistoryImage = Helper.getImage(f'{Order.CURR_DIR}/IMG_Order_History.png')
+        self.orderHistoryButton = Button(self.topFrame, text='Order History', image=self.orderHistoryImage, height=Constants.BIG_BUTTON_HEIGHT, font=Constants.BIG_BUTTON_FONT, compound=LEFT)
+        self.orderHistoryButton.pack(side=RIGHT, padx=10, pady=10)
 
         # Bottom Left Frame
         self.bottomLeftFrame = LabelFrame(self, text='')
         self.bottomLeftFrame.pack(padx=10, pady=10, side=LEFT, fill=BOTH, expand=True)
+        self.bottomLeftFrame.bind('<Button 1>', lambda x: self.clearSelection())
 
         # Bottom Left Top Frame
         self.bottomLeftTopFrame = LabelFrame(self.bottomLeftFrame, text='Order Details')
@@ -67,6 +76,9 @@ class Order(Toplevel):
         self.itemButtonUpdate = Button(self.bottomLeftMiddleFrame, text='Update', font=Constants.OPTION_BUTTON_FONT, height=2, command=self.updateOrderTreeView)
         self.itemButtonUpdate.pack(side=LEFT, padx=10, pady=10, fill=X, expand=True)
         
+        self.itemButtonDelete = Button(self.bottomLeftMiddleFrame, text='Delete', font=Constants.OPTION_BUTTON_FONT, height=2, command=self.deleteOrderTreeView)
+        self.itemButtonDelete.pack(side=LEFT, padx=10, pady=10, fill=X, expand=True)
+        
         # Bottom Left Bottom Frame
         self.bottomLeftBottomFrame = LabelFrame(self.bottomLeftFrame, text='Order Summary')
         self.bottomLeftBottomFrame.pack(padx=10, pady=10, side=TOP, fill=BOTH)
@@ -84,10 +96,20 @@ class Order(Toplevel):
         self.totalItemsName = Label(self.bottomLeftBottomFrame, text='Items:', font=Constants.ENTRY_FONT)
         self.totalItemsName.pack(side=RIGHT, padx=10, pady=10)
 
+        self.buyerNameLabel = Label(self.bottomLeftBottomFrame, text='Buyer:', font=Constants.ENTRY_FONT)
+        self.buyerNameLabel.pack(side=LEFT, padx=10, pady=10)
+        self.buyerNameValue = Entry(self.bottomLeftBottomFrame, font=Constants.ENTRY_FONT, width=25)
+        self.buyerNameValue.pack(side=LEFT, padx=10, pady=10, fill=X)
+
+        # Error Label
+        self.errorLabelName = Label(self.bottomLeftFrame, text='Message: ', foreground='Black')
+        self.errorLabelName.pack(padx=10, pady=10, side=LEFT, fill=BOTH)
+        self.errorLabelValue = Label(self.bottomLeftFrame, text='')
+        self.errorLabelValue.pack(pady=10, side=LEFT, fill=BOTH)
+
         # Bottom Right Frame
         self.bottomRightFrame = LabelFrame(self, text='Inventory')
         self.bottomRightFrame.pack(padx=(0,10), pady=10, side=RIGHT, fill=BOTH)
-        # self.bottomRightFrame.bind('<Button 1>', lambda x: self.clearSelection())
 
         self.searchEntry = Entry(self.bottomRightFrame, font=Constants.ENTRY_FONT, width=50)
         self.searchEntry.insert(0, 'Search Item')
@@ -111,22 +133,24 @@ class Order(Toplevel):
             self.itemTView.insert('', END, values=result)
 
     def loadTreeView(self):
-        resultSet = Helper.executeQuery('SELECT NAME, PRICE FROM ITEMS')
+        resultSet = Helper.executeQuery('SELECT NAME, PRICE FROM ITEMS ORDER BY NAME')
         self.updateInventoryTreeView(resultSet)
     
     def updateSearchResults(self): 
         searchText = self.searchEntry.get()
-        query = f'SELECT NAME, PRICE FROM ITEMS WHERE LOWER(NAME) LIKE LOWER("%{searchText}%")'
+        query = f'SELECT NAME, PRICE FROM ITEMS WHERE LOWER(NAME) LIKE LOWER("%{searchText}%") ORDER BY NAME'
         resultSet = Helper.executeQuery(query)
         self.updateInventoryTreeView(resultSet)
     
     def populateTotalSumAndItems(self):
         totalSum = 0
+        totalItems = 0
         for child in self.itemTViewOrder.get_children():
             item, price, quantity, total = self.itemTViewOrder.item(child)['values']
             totalSum += float(price) * int(quantity)
+            totalItems += int(quantity)
         self.totalValue['text'] = totalSum
-        self.totalItemsValue['text'] = len(self.itemTViewOrder.get_children())
+        self.totalItemsValue['text'] = totalItems
     
     def pushToMainTree(self, event): 
         self.currentInventoryTreeSelection = self.itemTView.item(self.itemTView.focus())
@@ -148,20 +172,75 @@ class Order(Toplevel):
     
     def updateOrderTreeView(self):
         if self.itemEntryPrice.get() and self.itemEntryQty.get():
-            currentTVOrderList = [ [child, self.itemTViewOrder.item(child)['values']] for child in self.itemTViewOrder.get_children() ]
-            for id, (name, price, qty, total) in currentTVOrderList:
-                # print(id, name, price, qty, total, self.itemLabelValue['text'])
-                if name == self.itemLabelValue['text']:
-                    self.itemTViewOrder.delete(id)
-                    self.itemTViewOrder.insert('', END, values=[name, float(self.itemEntryPrice.get()), int(self.itemEntryQty.get()), (float(self.itemEntryPrice.get()) * int(self.itemEntryQty.get()))])
-                    break
-            self.populateTotalSumAndItems()
-
+            if int(self.itemEntryQty.get()) > 0:
+                currentTVOrderList = [ [child, self.itemTViewOrder.item(child)['values']] for child in self.itemTViewOrder.get_children() ]
+                for idx, (id, (name, price, qty, total)) in enumerate(currentTVOrderList):
+                    # print(id, name, price, qty, total, self.itemLabelValue['text'])
+                    if name == self.itemLabelValue['text']:
+                        self.itemTViewOrder.delete(id)
+                        self.itemTViewOrder.insert('', idx, values=[name, float(self.itemEntryPrice.get()), int(self.itemEntryQty.get()), (float(self.itemEntryPrice.get()) * int(self.itemEntryQty.get()))])
+                        self.clearSelection()
+                        self.changeErrorLabelValue('Item Updated Successfully', 'Green')
+                        break
+                self.populateTotalSumAndItems()
+            else:
+                self.changeErrorLabelValue('Quantity cannot be less than or equal to 0', 'Red')    
+        else:
+            self.changeErrorLabelValue('Select an Item for Updation (Double Click)', 'Red')
     
-    # TODO Add KeyRelease when updating, so that when update on text box should reflect tree and from tree below labels.
-    # Then add same thing for inventory search for both order and inventory page
-    # TODO Clear Focus / Current Selection. Click on Frame 2 then Frame 1 should be cleared. Vice-Versa
-    def generateInvoice(self): pass
+    def deleteOrderTreeView(self):
+        if len(self.itemTViewOrder.selection()) > 0:
+            response = messagebox.askquestion('Delete', f'Are you sure you want to delete {len(self.itemTViewOrder.selection())} items')
+            if response == 'yes':
+                for x in self.itemTViewOrder.selection():
+                    self.itemTViewOrder.delete(x)
+                    self.populateTotalSumAndItems()
+                self.changeErrorLabelValue('Items Deleted', 'Green')
+        else:
+            self.changeErrorLabelValue('Select one or more Items for Deletion (CTRL + Click for multiple selection)', 'Red')
+    
+    def clearSelection(self):
+        self.itemTView.selection_remove(self.itemTView.selection())
+        self.itemTViewOrder.selection_remove(self.itemTViewOrder.selection())
+        self.itemLabelValue['text'] = ''
+        self.itemLabelTotalValue['text'] = ''
+        self.itemEntryPrice.delete(0, END)
+        self.itemEntryQty.delete(0, END)
+    
+    def generateInvoice(self): 
+        if len(self.itemTViewOrder.get_children()):
+            if self.buyerNameValue.get().strip():
+                current_timestamp = int((datetime.now() - datetime(1970,1,1)).total_seconds())
+                buyerName = self.buyerNameValue.get().strip()
+                totalSum = 0
+                totalItems = 0
+                items = []
+                for child in self.itemTViewOrder.get_children():
+                    item, price, quantity, total = self.itemTViewOrder.item(child)['values']
+                    items.append([item, price, quantity, total])
+                    totalSum += float(price) * int(quantity)
+                    totalItems += int(quantity)
+                doc = DocxTemplate(f"{Order.CURR_DIR}/BillingTemplate.docx")                
+                doc.render({"name": buyerName, "items": items, "count": totalItems, "total": totalSum})
+                filename = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{buyerName}.docx"
+                doc.save(filename)
+                messagebox.showinfo('Info', f'Invoice Generated \n{filename}')
+                self.changeErrorLabelValue(f'Invoice Generated! (File: {filename})', 'Green')
+
+                # Save Information Into Order Table
+                try:
+                    query = f'INSERT INTO {Constants.DB_TABLE_ORDERS} (BUYER, TOTALITEMS, SUBTOTAL, ITEMS, TIME) VALUES (?, ?, ?, ?, ?)'
+                    Helper.executeQuery(query, (buyerName, totalItems, totalSum, json.dumps(items), current_timestamp))
+                except Exception as e:
+                    self.changeErrorLabelValue(e, 'Red')
+            else:
+                self.changeErrorLabelValue('Enter Buyer Name', 'Red')    
+        else:
+            self.changeErrorLabelValue('Add Items to order', 'Red')
+
+    def changeErrorLabelValue(self, message, color):
+        self.errorLabelValue['foreground'] = color
+        self.errorLabelValue['text'] = message
     
     def closeWindow(self): self.destroy()
 
