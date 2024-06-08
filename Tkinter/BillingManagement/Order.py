@@ -250,18 +250,18 @@ class Order(Toplevel):
     
     def closeWindow(self): self.destroy()
 
-def main():
-    root = Tk()
-    app = Order()
-    app.attributes('-topmost',True)
-    screenWidth = root.winfo_screenwidth()
-    screenHeight = root.winfo_screenheight()
-    root.geometry(f'{screenWidth}x{screenHeight}')
-    root.resizable(False, False)
-    root.bind('<Escape>', lambda x: closeWindow(root))
-    root.mainloop()
+# def main():
+#     root = Tk()
+#     app = Order()
+#     app.attributes('-topmost',True)
+#     screenWidth = root.winfo_screenwidth()
+#     screenHeight = root.winfo_screenheight()
+#     root.geometry(f'{screenWidth}x{screenHeight}')
+#     root.resizable(False, False)
+#     root.bind('<Escape>', lambda x: closeWindow(root))
+#     root.mainloop()
 
-def closeWindow(self): self.destroy()
+# def closeWindow(self): self.destroy()
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()

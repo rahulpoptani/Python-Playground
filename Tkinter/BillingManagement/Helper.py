@@ -1,10 +1,18 @@
 from tkinter import *
-import sqlite3
+import sqlite3, os, sys
 from Constants import Constants
 
 class Helper:
+    def resource_path(relative_path):
+        try:
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath(".")
+        return os.path.join(base_path, relative_path)
+
+    
     def getImage(name: str) -> PhotoImage:
-        return PhotoImage(file=f'{name}')
+        return PhotoImage(file=Helper.resource_path(f'{name}'))
     
     def dataBootstrap():
         print('Data Bootstrapping Started')
