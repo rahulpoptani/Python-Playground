@@ -102,6 +102,7 @@ class Inventory(Toplevel):
             df = pd.DataFrame(resultSet)
             filename = f"Inventory_Backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv" 
             df.to_csv(filename, index=False, header=False)
+            messagebox.showinfo('Info', f'Inventory Backup Completed\n{filename}')
             self.changeErrorLabelValue(f'Inventory Backup Completed! (File: {filename})', 'Green')
     
     def restoreInventory(self):

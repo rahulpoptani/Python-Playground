@@ -5,6 +5,7 @@ from docxtpl import DocxTemplate
 from datetime import datetime
 from Helper import Helper
 from Constants import Constants
+from OrderHistory import OrderHistory
 
 class Order(Toplevel):
     CURR_DIR = '/'.join(__file__.split('/')[:-1])
@@ -25,7 +26,7 @@ class Order(Toplevel):
         self.backButton.pack(side=LEFT, padx=10, pady=10)
         
         self.orderHistoryImage = Helper.getImage(f'{Order.CURR_DIR}/IMG_Order_History.png')
-        self.orderHistoryButton = Button(self.topFrame, text='Order History', image=self.orderHistoryImage, height=Constants.BIG_BUTTON_HEIGHT, font=Constants.BIG_BUTTON_FONT, compound=LEFT)
+        self.orderHistoryButton = Button(self.topFrame, text='Order History', image=self.orderHistoryImage, height=Constants.BIG_BUTTON_HEIGHT, font=Constants.BIG_BUTTON_FONT, compound=LEFT, command=self.openOrderHistory)
         self.orderHistoryButton.pack(side=RIGHT, padx=10, pady=10)
 
         # Bottom Left Frame
@@ -127,6 +128,9 @@ class Order(Toplevel):
 
         self.loadTreeView()
         
+    def openOrderHistory(self):
+        orderHistory = OrderHistory()
+    
     def updateInventoryTreeView(self, resultSet):
         self.itemTView.delete(*self.itemTView.get_children())
         for result in resultSet:
@@ -226,6 +230,8 @@ class Order(Toplevel):
                 doc.save(filename)
                 messagebox.showinfo('Info', f'Invoice Generated \n{filename}')
                 self.changeErrorLabelValue(f'Invoice Generated! (File: {filename})', 'Green')
+                self.itemTViewOrder.delete(*self.itemTViewOrder.get_children())
+                self.buyerNameValue.delete(0, END)
 
                 # Save Information Into Order Table
                 try:
