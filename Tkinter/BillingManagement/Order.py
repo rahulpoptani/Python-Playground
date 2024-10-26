@@ -8,7 +8,6 @@ from Constants import Constants
 from OrderHistory import OrderHistory
 
 class Order(Toplevel):
-    CURR_DIR = '/'.join(__file__.split('/')[:-1])
     def __init__(self):
         Toplevel.__init__(self)
         screenWidth = self.winfo_screenwidth()
@@ -21,11 +20,11 @@ class Order(Toplevel):
         self.topFrame = LabelFrame(self, text='', bg=Constants.TOPFRAME_BG)
         self.topFrame.pack(side=TOP, fill=BOTH, padx=10, pady=10)
 
-        self.backImage = Helper.getImage(f'{Order.CURR_DIR}/IMG_Back.png')
+        self.backImage = Helper.getImage('IMG_Back.png')
         self.backButton = Button(self.topFrame, text='Back', image=self.backImage, height=Constants.BIG_BUTTON_HEIGHT, font=Constants.BIG_BUTTON_FONT, compound=LEFT, command=self.destroy)
         self.backButton.pack(side=LEFT, padx=10, pady=10)
         
-        self.orderHistoryImage = Helper.getImage(f'{Order.CURR_DIR}/IMG_Order_History.png')
+        self.orderHistoryImage = Helper.getImage('IMG_Order_History.png')
         self.orderHistoryButton = Button(self.topFrame, text='Order History', image=self.orderHistoryImage, height=Constants.BIG_BUTTON_HEIGHT, font=Constants.BIG_BUTTON_FONT, compound=LEFT, command=self.openOrderHistory)
         self.orderHistoryButton.pack(side=RIGHT, padx=10, pady=10)
 
@@ -224,7 +223,7 @@ class Order(Toplevel):
                     items.append([item, price, quantity, total])
                     totalSum += float(price) * int(quantity)
                     totalItems += int(quantity)
-                doc = DocxTemplate(f"{Order.CURR_DIR}/BillingTemplate.docx")                
+                doc = DocxTemplate("BillingTemplate.docx")                
                 doc.render({"name": buyerName, "items": items, "count": totalItems, "total": totalSum})
                 filename = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{buyerName}.docx"
                 doc.save(filename)

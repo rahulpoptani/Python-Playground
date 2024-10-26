@@ -8,7 +8,6 @@ from Helper import Helper
 from Constants import Constants
 
 class Inventory(Toplevel):
-    CURR_DIR = '/'.join(__file__.split('/')[:-1])
     def __init__(self):
         Toplevel.__init__(self)
         screenWidth = self.winfo_screenwidth()
