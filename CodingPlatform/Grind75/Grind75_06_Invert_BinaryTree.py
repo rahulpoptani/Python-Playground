@@ -15,26 +15,16 @@ Output: []
 
 '''
 
+import os, sys
 from typing import Optional
-from collections import deque
+sys.path.append(os.path.abspath(os.curdir))
+from DataStructures.Tree.TreeUtils import print_tree_visual
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
-        self.val = val
+        self.value = val
         self.left = left
         self.right = right
-    def printBT(self):
-        elements = []
-        queue = deque()
-        queue.append(self)
-        while queue:
-            current = queue.popleft()
-            elements.append(current.val)
-            if current.left:
-                queue.append(current.left)
-            if current.right:
-                queue.append(current.right)
-        print(elements)
 
 def invertTree(root: Optional[TreeNode]) -> Optional[TreeNode]:
     if not root: return None
@@ -53,5 +43,6 @@ t.left.right = TreeNode(3)
 t.right.left = TreeNode(6)
 t.right.right = TreeNode(9)
 
-t.printBT()
-invertTree(t).printBT()
+print_tree_visual(t)
+invertTree(t)
+print_tree_visual(t)

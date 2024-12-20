@@ -18,18 +18,22 @@ Input: root = [2,1], p = 2, q = 1
 Output: 2
 '''
 
+import os, sys
+sys.path.append(os.path.abspath(os.curdir))
+from DataStructures.Tree.TreeUtils import print_tree_visual
+
 class TreeNode:
     def __init__(self, x):
-        self.val = x
+        self.value = x
         self.left = None
         self.right = None
 
 def lowestCommonAncestor(root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
     curr = root
     while curr:
-        if p.val > curr.val and q.val > curr.val:
+        if p.value > curr.value and q.value > curr.value:
             curr = curr.right
-        elif p.val < curr.val and q.val < curr.val:
+        elif p.value < curr.value and q.value < curr.value:
             curr = curr.left
         else:
             return curr
@@ -44,4 +48,8 @@ root.right.right = TreeNode(9)
 root.left.right.left = TreeNode(3)
 root.left.right.right = TreeNode(5)
 
-print(lowestCommonAncestor(root, TreeNode(2), TreeNode(8)).val)
+print('LCA of 2 and 8 =>', lowestCommonAncestor(root, TreeNode(2), TreeNode(8)).value)
+print('LCA of 3 and 4 =>', lowestCommonAncestor(root, TreeNode(3), TreeNode(4)).value)
+print('LCA of 5 and 0 =>', lowestCommonAncestor(root, TreeNode(5), TreeNode(0)).value)
+
+print_tree_visual(root)

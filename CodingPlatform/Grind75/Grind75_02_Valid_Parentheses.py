@@ -26,15 +26,19 @@ Output: true
 
 def isValid(s: str) -> bool:
     stack = []
+    openParanthesis = ['(', '{', '[']
+    closeParanthesis = [')', '}', ']']
     for c in s:
-        if c in ['(', '{', '[']:
+        if c in openParanthesis:
             stack.append(c)
         else:
             try:
                 e = stack.pop()
-                if c == ')' and not e == '(': return False
-                elif c == '}' and not e == '{': return False
-                elif c == ']' and not e == '[': return False
+                if c in closeParanthesis:
+                    if c == ')' and not e == '(': return False
+                    elif c == '}' and not e == '{': return False
+                    elif c == ']' and not e == '[': return False
+                else: return False
             except IndexError: return False
     if stack: return False
     return True
@@ -45,3 +49,4 @@ print(isValid("(]"))
 print(isValid("([])"))
 print(isValid("["))
 print(isValid("]"))
+print(isValid("(-"))

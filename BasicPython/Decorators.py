@@ -1,14 +1,25 @@
-def outer_func(msg):
-    message = msg
-    def inner_func():
-        print(message)
-    return inner_func
 
-hi_func = outer_func('Hi')
-bye_func = outer_func('Bye')
 
-hi_func()
-bye_func()
+import time
+
+def timing_decorator(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        print(f"{func.__name__} took {end_time - start_time} seconds to run.")
+        return result
+    return wrapper
+
+@timing_decorator
+def data_preprocessing(data):
+    # Some heavy computation here
+    processed = [x*2 for x in data]
+    return processed
+
+# Using the decorated function
+data = [1, 2, 3, 4]
+processed = data_preprocessing(data)
 
 
 ##########################################################

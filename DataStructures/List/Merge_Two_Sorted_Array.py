@@ -21,7 +21,3 @@ list2 = [2,5,6,7]
 mergelist = merge_lists(list1, list2)
 print(mergelist)
 
-# Time Complexity:
-# Since both list are traversed the time complexity is O(m(m+n)) where m and n are length of list
-# If both list were traversed saperately in such case it will be O(m+n)
-# In worst-case, 2nd list have all elements smaller than 1st list, in this case it will be O(mn)

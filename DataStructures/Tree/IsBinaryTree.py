@@ -1,11 +1,12 @@
 from Node import Node
 import sys
+from TreeUtils import print_tree_visual
     
 def isBST(node, min, max):
     if node is None: return True
-    if node.data < min or node.data > max:
+    if node.value < min or node.value > max:
         return False
-    return isBST(node.left, min, node.data-1) and isBST(node.right, node.data+1, max)
+    return isBST(node.left, min, node.value-1) and isBST(node.right, node.value+1, max)
 
 
 root = Node(4)
@@ -21,3 +22,5 @@ if (isBST(root,min,max)):
     print ("Is BST")
 else:
     print ("Not a BST")
+
+print_tree_visual(root)

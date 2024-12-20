@@ -61,14 +61,14 @@ print(f'Balanced BT: {isBalancedBT(IBroot)}')
 # Sum of all nodes
 def sumTree(root: Node):
     if root == None: return 0
-    return root.data + sumTree(root.left) + sumTree(root.right)
+    return root.value + sumTree(root.left) + sumTree(root.right)
 
 print(f'Sum of all nodes: {sumTree(root)}')
 
 # Minimum Value in Binary Tree
 def minValue(root: Node):
     stack = [root]
-    minvalue = root.data
+    minvalue = root.value
     while stack:
         current = stack.pop()
         if current.right:

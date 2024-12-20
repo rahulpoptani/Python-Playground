@@ -24,7 +24,7 @@ def maxSum(arr, n):
     # compute value for other iterations
     for x in range(1, len(arr)):
         # Compute next value using previous value
-        next_val = ( curr_val - (cum_sum - arr[x-1]) + arr[x-1] * (n-1) )
+        next_val = curr_val - ( cum_sum - arr[x-1] ) + ( arr[x-1] * (n-1) )
 
         # update current value
         curr_val = next_val
@@ -34,6 +34,7 @@ def maxSum(arr, n):
     
     return res
 
-arr = [8,3,1,2]
-n = len(arr)
-print(maxSum(arr, n))
+print(maxSum([8,3,1,2], len([8,3,1,2])))
+print(maxSum([3,2,1], len([3,2,1])))
+
+# Time Complexity: O(n)

@@ -35,7 +35,8 @@ def countRotations2(arr):
     
     # find index of minimum element in array, the index will be number of rotations
     while (start <= end):
-        mid = start + (end - start) // 2
+        # mid = start + (end - start) // 2  # ???
+        mid = (start + end) // 2
         # calculate previous and next of mid
         prev = (mid - 1 + n) % n
         next = (mid + 1 + n) % n
@@ -49,6 +50,3 @@ def countRotations2(arr):
 
 print(countRotations2(arr1))
 print(countRotations2(arr2))
-
-
-

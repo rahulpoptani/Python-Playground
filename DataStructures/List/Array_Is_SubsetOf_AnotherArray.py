@@ -14,4 +14,6 @@ def isSubset(arr1,arr2):
 
 arr1 = [ 11, 1, 13, 21, 3, 7 ]
 arr2 = [ 11, 3, 7, 1 ]
+
 print(isSubset(arr1,arr2))
+print(isSubset(arr2,arr1))
