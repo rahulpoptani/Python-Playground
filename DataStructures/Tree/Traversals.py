@@ -3,14 +3,14 @@ sys.path.append(os.path.abspath(os.curdir))
 from Node import Node
 from collections import deque
 from DataStructures.Stack.Stack import Stack
+from TreeUtils import print_tree_visual
 
-'''
-      4
-    /   \
-   2     6
-  / \   / \
- 1   3 5   7
-'''
+#       4
+#     /   \
+#    2     6
+#   / \   / \
+#  1   3 5   7
+
 root = Node(4)
 root.left = Node(2)
 root.left.left = Node(1)
@@ -19,7 +19,9 @@ root.right = Node(6)
 root.right.left = Node(5)
 root.right.right = Node(7)
 
-# In Order Traversal Left-Root-Right
+print_tree_visual(root)
+
+# In Order Traversal => Left-Root-Right
 elements = []
 def inOrder(root):
     if root:
@@ -34,12 +36,11 @@ elements = []
 def InOrderIterative(root):
     stack = []
     node = root
-    while True:
+    while stack or node:
         if node:
             stack.append(node)
             node = node.left
         else:
-            if not stack: return
             node = stack.pop()
             elements.append(node.data)
             node = node.right
@@ -47,7 +48,7 @@ def InOrderIterative(root):
 InOrderIterative(root)
 print('InOrder Iterative ->', elements)
 
-# Pre Order Traversal Root-Left-Right
+# Pre Order Traversal => Root-Left-Right
 elements = []
 def preOrder(root):
     if root:
@@ -58,7 +59,21 @@ def preOrder(root):
 preOrder(root)
 print('PreOrder ->', elements)
 
-# Post Order Traversal Left-Right-Root
+elements = []
+def preOrderIterative(root):
+    stack = [root]
+    while stack:
+        current = stack.pop()
+        elements.append(current.data)
+        if current.right:
+            stack.append(current.right)
+        if current.left:
+            stack.append(current.left)
+
+preOrderIterative(root)
+print('PreOrder Iterative ->', elements)
+
+# Post Order Traversal => Left-Right-Root
 elements = []
 def postOrder(root):
     if root:

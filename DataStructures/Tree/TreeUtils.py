@@ -6,7 +6,7 @@ def get_tree_height(node):
 def fill_tree_matrix(matrix, node, row, col, gap):
     if not node:
         return
-    matrix[row][col] = str(node.value)
+    matrix[row][col] = str(node.data)
     if node.left:
         fill_tree_matrix(matrix, node.left, row + 1, col - gap // 2, gap // 2)
     if node.right:
