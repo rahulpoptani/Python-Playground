@@ -28,29 +28,33 @@ def myAtoi(s: str) -> int:
     
     if str[0] == '-':
         negative = True
+        str = str[1:]
     elif str[0] == '+':
         negative = False
     elif not str[0].isnumeric:
         return 0
-    else:
+    
+    try:
         out = int(str[0])
-        print(f'top out: {out}')
-        for x in range(1, len(str)):
-            if str[x].isnumeric():
-                out = out*10 + int(str[x])
-                print(f'new out {out}')
-                if not negative and out > 2147483647:
-                    return 2147483647
-                if negative and out > 2147483647:
-                    return -2147483648
-            else:
-                break
-        if not negative:
-            return out
+    except ValueError:
+        return 0
+    
+    for x in range(1, len(str)):
+        if str[x].isnumeric():
+            out = out*10 + int(str[x])
+            if not negative and out > 2147483647:
+                return 2147483647
+            if negative and out > 2147483647:
+                return -2147483648
         else:
-            return -out
+            break
+    
+    if not negative: return out
+    else: return -out
 
 
-res = myAtoi('42')
-
-print(res)
+print(myAtoi(s = "42"))
+print(myAtoi(s = "   -42"))
+print(myAtoi(s = "4193 with words"))
+print(myAtoi(s = "words and 987"))
+print(myAtoi(s = "-91283472332"))

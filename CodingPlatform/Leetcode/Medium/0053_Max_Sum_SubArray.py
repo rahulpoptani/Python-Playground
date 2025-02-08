@@ -20,15 +20,15 @@ Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
 from typing import List
 
 def maxSubArray(nums: List[int]) -> int:
-    maxSub = nums[0]
+    maxSum = nums[0]
     currSum = 0
     
     for x in nums:
         if currSum < 0:
             currSum = 0
         currSum += x
-        maxSub = max(maxSub, currSum)
-    return maxSub
+        maxSum = max(maxSum, currSum)
+    return maxSum
     
 
 

@@ -16,20 +16,18 @@ def lengthOfLongestSubstring(s: str) -> int:
     res = set()
     left = 0
     maxchar = 0
-    for x in s:    
-        if x not in res:
-            res.add(x)
-            maxchar = max(maxchar, len(res))
-        else:
-            while(x in res):
-                res.remove(s[left])
-                left += 1
-            res.add(x)
+
+    for right in range(len(s)):
+        while(s[right] in res):
+            res.remove(s[left])
+            left += 1
+        res.add(s[right])
+        maxchar = max(maxchar, right - left + 1) # instead of right-left+1, we can also use len(res), but the time complexity to calculate the length would be an overhead:
     
-    print(f'Length of longest substring from string: {s} is : {maxchar} with string: {"".join(res)}')
+    return maxchar
 
 
-lengthOfLongestSubstring('abcabcbb')
-lengthOfLongestSubstring('pwwkew')
-lengthOfLongestSubstring('bbbbb')
-lengthOfLongestSubstring('dvdf')
+print(lengthOfLongestSubstring('abcabcbb'))
+print(lengthOfLongestSubstring('pwwkew'))
+print(lengthOfLongestSubstring('bbbbb'))
+print(lengthOfLongestSubstring('dvdf'))

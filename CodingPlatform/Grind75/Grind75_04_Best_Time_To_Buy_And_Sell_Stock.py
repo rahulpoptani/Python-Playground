@@ -27,8 +27,7 @@ def maxProfit(prices: List[int]) -> int:
             l = r
         r += 1
     return maxProfit
-
-
+import sys
 
 print(maxProfit([7,1,5,3,6,4]))
 print(maxProfit([7,6,4,3,1]))

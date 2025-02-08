@@ -17,14 +17,14 @@ def find132Pattern(nums):
     curMin = nums[0]
 
     for n in nums[1:]:
-        while stack and n >= stack[-1][0]:
+        while stack and n >= stack[-1][1]:
             stack.pop()
-        if stack and n > stack[-1][1]:
+        if stack and n > stack[-1][0]:
             return True
-        stack.append([n, curMin])
         curMin = min(curMin, n)
+        stack.append([curMin, n])
     return False
 
 print(find132Pattern([1,2,3,4]))
 print(find132Pattern([3,1,4,2]))
-print(find132Pattern([-1,3,2,0]))
+print(find132Pattern([-1,3,2,0]))   
