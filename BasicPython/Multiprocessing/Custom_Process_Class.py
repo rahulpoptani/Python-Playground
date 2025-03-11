@@ -8,7 +8,7 @@ from multiprocessing import Process
 
 class CustomProcess(Process):
     def __init__(self, value):
-        # Base class initialization is only  required when CustomProcess class accept arguments. Otherwise it can be missed
+        # Base class initialization is only required when CustomProcess class accept arguments. Otherwise it can be missed
         Process.__init__(self)
         self.value = value
     

@@ -6,3 +6,4 @@ def decimalToBinary(number):
 
 
 print(decimalToBinary(11))
+print(decimalToBinary(14))

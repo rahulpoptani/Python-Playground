@@ -1,3 +1,4 @@
+from Common.Tags import ARRAY
 import sys
 
 def find_second_maximum(lst):

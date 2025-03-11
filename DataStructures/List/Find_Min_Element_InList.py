@@ -1,3 +1,5 @@
+from Common.Tags import ARRAY
+
 def find_minimum(arr):
     if (len(arr) <= 0):
         return None

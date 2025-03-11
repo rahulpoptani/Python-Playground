@@ -1,4 +1,4 @@
-class MinStack():
+class MinStack:
     def __init__(self):
         self.list = []
         self.minlist = []
@@ -18,13 +18,11 @@ class MinStack():
             self.list.append(value)
             self.minlist.append(value)
         else:
-            if self.minlist[-1] < value:
-                self.ssize += 1
-                self.list.append(value)
+            self.ssize += 1
+            self.list.append(value)
+            if self.minlist[-1] < value:    
                 self.minlist.append(self.minlist[-1])
             else:
-                self.ssize += 1
-                self.list.append(value)
                 self.minlist.append(value)
     
     def pop(self):

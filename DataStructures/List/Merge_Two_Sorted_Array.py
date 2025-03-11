@@ -1,4 +1,5 @@
 
+from Common.Tags import ARRAY, MERGE_ARRAY
 def merge_lists(lst1, lst2):
     x = 0
     y = 0

@@ -1,4 +1,13 @@
 
+'''
+Quick Sort is a highly efficient divide-and-conquer sorting algorithm that:
+    Picks a pivot element from the array.
+    Partitions the array such that:
+        Elements smaller than the pivot go to the left.
+        Elements larger than the pivot go to the right.
+    Recursively applies Quick Sort to both halves.
+'''
+
 def partition(l, r, nums):
     pivot = nums[r]
     pointer = l

@@ -15,7 +15,7 @@ def task(barrier, number):
     value = random()
     sleep(value)
     print(f'Process {number}, got: {value}', flush=True)
-    # wait for all other processes to complete
+    # wait for all other processes to completes
     barrier.wait()
 
 if __name__ == '__main__':

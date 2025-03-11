@@ -82,7 +82,7 @@ class PDFParserNew(FormalParserInterface):
 class EMAILParserNew(FormalParserInterface):
     def load_data_source(self, path: str, file_name: str) -> str:
         pass
-    def extract_text_from_email(self, full_file_name: str) -> dict:
+    def extract_text(self, full_file_name: str) -> dict:
         pass
 
 # email_parser will throw error because all interface methods are not implemented

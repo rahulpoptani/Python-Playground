@@ -1,3 +1,4 @@
+from Common.Tags import ARRAY
 # Rearrange sorted list in Max/Min Form
 # 0th Index = Maximum Value
 # 1st Index = Minimum Value
