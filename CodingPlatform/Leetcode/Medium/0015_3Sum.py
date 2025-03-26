@@ -46,7 +46,7 @@ def threeSum(nums: List[int]) -> List[List[int]]:
             if total < 0:
                 left += 1
             elif total > 0:
-                right -= 1
+                rigsht -= 1
             else:
                 res.append([nums[i], nums[left], nums[right]])
                 while left < right and nums[left] == nums[left+1]:
@@ -59,8 +59,18 @@ def threeSum(nums: List[int]) -> List[List[int]]:
         
     return res
 
-
-
 print(threeSum(nums = [-1,0,1,2,-1,-4]))
 print(threeSum(nums = [0,1,1]))
 print(threeSum(nums = [0,0,0]))
+
+'''
+Time Complexity: O(n^2).
+    Sorting the array takes O(n log n), where n is the length of the input array.
+    The main loop iterates through the array, and for each element, a two-pointer approach is used to find pairs that sum to the target. The two-pointer approach runs in O(n) for each iteration.
+    In the worst case, the main loop runs O(n) times, so the total time complexity is O(n^2).
+
+Space Complexity: O(1)
+    The solution uses O(1) additional space for variables and pointers.
+    The result list res is not considered in the space complexity since it depends on the output size, which is determined by the input.
+    Thus, the overall space complexity is O(1) (excluding the output).
+'''

@@ -22,7 +22,7 @@ from DataStructures.Tree.TreeUtils import print_tree_visual
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
-        self.value = val
+        self.data = val
         self.left = left
         self.right = right
 
