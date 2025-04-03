@@ -1,5 +1,7 @@
 Subtypes must be substitutable for their base types without altering the correctness of the program.
 
+Subclass should not change the expected behaviour of parent class
+
 This means that if **class B** is a subclass of **class A**, then objects of **type A** should be replaceable with objects of **type B** without breaking the functionality.
 
 this principle is about making your subclasses behave like their base classes without breaking anyone’s expectations when they call the same methods.

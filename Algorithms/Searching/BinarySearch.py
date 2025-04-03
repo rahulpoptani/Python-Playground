@@ -1,4 +1,3 @@
-
 def binarySearchIterative(arr, x):
     low = 0
     high = len(arr)-1
@@ -13,8 +12,7 @@ def binarySearchIterative(arr, x):
     return -1
 
 arr = [ 2, 3, 4, 10, 40 ]
-x = 10
-print(f'BinarySearch Iterative: {binarySearchIterative(arr,x)}')
+print(f'BinarySearch Iterative: {binarySearchIterative(arr, 10)}')
 
 def binarySearchRecursive(arr,low,high,x):
     if high >= low:

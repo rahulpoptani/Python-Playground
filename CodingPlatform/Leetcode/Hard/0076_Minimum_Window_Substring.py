@@ -22,5 +22,28 @@ Since the largest window of s only has one 'a', return empty string.
 '''
 
 def minWindow(s: str, t: str) -> str:
-    first, second, last = 0, 0, 0
+    if t == "": return ""
+
+    countT, window = {}, {}
+
+    # create a map and store the occurrence of the target string
+    for c in t:
+        countT[c] = 1 + countT.get(c, 0)
     
+    have, need = 0, len(countT)
+    res, resLen = [-1, -1], float("infinity")
+
+    l = 0
+    for r in range(len(s)):
+        # current character
+        c = s[r]
+        window[c] = 1 + window.get(c, 0)
+
+        if c in countT and window[c] == countT[c]:
+            have += 1
+
+
+    
+
+print(minWindow(s = "ADOBECODEBANC", t = "ABC"))
+print(float("infinity"))

@@ -21,13 +21,10 @@ def has_path(graph, source, destination):
     while stack:
         current = stack.pop()
         visited.add(current)
-        try:
-            if current == destination: return True
-            for x in graph[current][::-1]:
-                if x not in visited:
-                    stack.append(x)
-        except KeyError:
-            return False
+        if current == destination: return True
+        for x in graph[current][::-1]:
+            if x not in visited:
+                stack.append(x)
     return False
 
 print(has_path(graph, 'i', 'l'))

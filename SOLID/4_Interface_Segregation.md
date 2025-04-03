@@ -1,7 +1,7 @@
 A client should not be forced to depend on interfaces it does not use
 
 ### What Does This Mean?
-1. A class should not implement methods it doesn’t need.w
+1. A class should not implement methods it doesn’t need.
 2. Instead of one large interface, break it into multiple smaller interfaces.
 3. This ensures better maintainability and flexibility.
 
