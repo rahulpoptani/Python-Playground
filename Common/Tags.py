@@ -21,3 +21,11 @@ STACK = None
 QUEUE = None
 HEAP = None
 GRAPH = None
+
+# Design Pattern
+CREATIONAL_FACTORY = None
+STRUCTURAL = None
+BEHAVIORAL_OBSERVER = None
+
+# Problem Type
+RECURSION = None
