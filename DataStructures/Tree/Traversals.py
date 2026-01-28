@@ -26,7 +26,7 @@ elements = []
 def inOrder(root):
     if root:
         inOrder(root.left)
-        elements.append(root.data)
+        elements.append(root.value)
         inOrder(root.right)
 
 inOrder(root)
@@ -42,7 +42,7 @@ def InOrderIterative(root):
             node = node.left
         else:
             node = stack.pop()
-            elements.append(node.data)
+            elements.append(node.value)
             node = node.right
 
 InOrderIterative(root)
@@ -52,7 +52,7 @@ print('InOrder Iterative ->', elements)
 elements = []
 def preOrder(root):
     if root:
-        elements.append(root.data)
+        elements.append(root.value)
         preOrder(root.left)
         preOrder(root.right)
 
@@ -64,7 +64,7 @@ def preOrderIterative(root):
     stack = [root]
     while stack:
         current = stack.pop()
-        elements.append(current.data)
+        elements.append(current.value)
         if current.right:
             stack.append(current.right)
         if current.left:
@@ -79,7 +79,7 @@ def postOrder(root):
     if root:
         postOrder(root.left)
         postOrder(root.right)
-        elements.append(root.data)
+        elements.append(root.value)
 
 postOrder(root)
 print('PostOrder ->', elements)
@@ -90,7 +90,7 @@ def postOrderIterative2Stack(root):
     stack2 = []
     while stack1:
         current = stack1.pop()
-        stack2.append(current.data)
+        stack2.append(current.value)
         if current.left:
             stack1.append(current.left)
         if current.right:
@@ -115,10 +115,10 @@ def postOrderIterative1Stack(root):
                 current = temp
             else:
                 temp = stack.pop()
-                elements.append(temp.data)
+                elements.append(temp.value)
                 while stack and temp == stack.peek().right:
                     temp = stack.pop()
-                    elements.append(temp.data)
+                    elements.append(temp.value)
 
 postOrderIterative1Stack(root)
 print('PostOrder Iterative 1 Stacks ->', elements)
@@ -130,7 +130,7 @@ def bfs(root):
     queue.append(root)
     while queue:
         current = queue.popleft()
-        elements.append(current.data)
+        elements.append(current.value)
         if current.left:
             queue.append(current.left)
         if current.right:
@@ -138,6 +138,24 @@ def bfs(root):
 
 bfs(root)
 print('BFS/Level Order ->', elements)
+
+def bfs(root):
+    res = []
+    queue = deque()
+    queue.append(root)
+    while queue:
+        queue_length = len(queue)
+        level = []
+        for x in range(queue_length):
+            node = queue.popleft()
+            if node:
+                level.append(node.value)
+                queue.append(node.left)
+                queue.append(node.right)
+        if level: res.append(level)
+    return res
+
+print('BFS/Level Order ->', bfs(root))
 
 # ZigZag Traversal
 elements = []
@@ -152,9 +170,9 @@ def zigzag(root):
         for x in range(size):
             current = queue.popleft()
             if direction:
-                temp[x] = current.data
+                temp[x] = current.value
             else:
-                temp[size - 1 - x] = current.data
+                temp[size - 1 - x] = current.value
             if current.left:
                 queue.append(current.left)
             if current.right:
@@ -173,7 +191,7 @@ def markLevel(root):
     queue.append([level, root])
     while queue:
         current = queue.popleft()
-        elements.append([current[0], current[1].data])
+        elements.append([current[0], current[1].value])
         if current[1].left:
             queue.append([current[0]+1, current[1].left])
         if current[1].right:
@@ -188,7 +206,7 @@ def dfs(root):
     stack = [root]
     while stack:
         current = stack.pop()
-        elements.append(current.data)
+        elements.append(current.value)
         if current.right:
             stack.append(current.right)
         if current.left:
@@ -205,17 +223,17 @@ def boundaryTraversal(root):
         if root:
             printLeaves(root.left)
             if not root.left and not root.right:
-                elements.append(root.data)
+                elements.append(root.value)
             printLeaves(root.right)
     
     # print left boundary
     def printLeftBoundary(root):
         if root:
             if root.left:
-                elements.append(root.data)
+                elements.append(root.value)
                 printLeftBoundary(root.left)
             elif root.right:
-                elements.append(root.data)
+                elements.append(root.value)
                 printLeftBoundary(root.right)
     
     # print right boundary
@@ -223,13 +241,13 @@ def boundaryTraversal(root):
         if root:
             if root.right:
                 printRightBoundary(root.right)
-                elements.append(root.data)
+                elements.append(root.value)
             elif root.left:
                 printRightBoundary(root.left)
-                elements.append(root.data)
+                elements.append(root.value)
     
     if root:
-        elements.append(root.data)
+        elements.append(root.value)
         printLeftBoundary(root.left)
         printLeaves(root.left)
         printLeaves(root.right)

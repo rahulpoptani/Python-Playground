@@ -26,8 +26,7 @@ If length is Even after merging then take Maximum of right most element of Array
 max(4, 3) + min (7, 6) = 4 + 6 = 10 = 10/2 = 5
 If length is Odd take take Maximum of right most element of Array1 Left and Array2 Left
 '''
-import sys
-    
+from Common.Tags import ARRAY, DIVIDE_AND_CONQUER
 
 def findMedianSortedArrays(nums1, nums2, len1, len2):
     A, B = nums1, nums2

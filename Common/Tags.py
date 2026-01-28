@@ -2,6 +2,8 @@
 # Appraoch
 TWO_POINTER = None
 SLIDING_WINDOW = None
+GREEDY = None
+DIVIDE_AND_CONQUER = None
 
 # Platform
 GRIND_75 = None
@@ -21,6 +23,7 @@ STACK = None
 QUEUE = None
 HEAP = None
 GRAPH = None
+HASH = None
 
 # Design Pattern
 CREATIONAL_FACTORY = None

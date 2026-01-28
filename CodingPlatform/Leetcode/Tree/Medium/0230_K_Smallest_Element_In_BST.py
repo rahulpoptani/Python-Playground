@@ -9,35 +9,35 @@ Output: 3
 '''
 
 from typing import Optional
+from DataStructures.Tree.TreeUtils import print_tree_visual
+from Common.Util import separator
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
-        self.val = val
+        self.value = val
         self.left = left
         self.right = right
 
+# use inorder traversal which returns the value in sorted order and return the kth element
 def kthSmallest(root: Optional[TreeNode], k: int) -> int:
-    n = 0
-    stack = []
-    cur = root
-
-    while cur or stack:
-        while cur:
-            stack.append(cur)
-            cur = cur.left
-        
-        cur = stack.pop()
-        n += 1
-        if n == k:
-            return cur.val
-        cur = cur.right
+    elements = []
+    def inOrder(root):
+        if root:
+            inOrder(root.left)
+            elements.append(root.value)
+            inOrder(root.right)
+    inOrder(root)
+    return elements[k-1]
 
 # Unit Test
 t = TreeNode(3)
 t.left = TreeNode(1)
 t.right = TreeNode(4)
 t.left.right = TreeNode(2)
-print(kthSmallest(t, 1))
+print_tree_visual(t)
+print("kthSmallest", kthSmallest(t, 1))
+
+separator("Tree 2")
 
 t = TreeNode(5)
 t.left = TreeNode(3)
@@ -45,8 +45,6 @@ t.right = TreeNode(6)
 t.left.left = TreeNode(2)
 t.left.right = TreeNode(4)
 t.left.left.left = TreeNode(1)
-print(kthSmallest(t, 3))
+print_tree_visual(t)
+print("kthSmallest", kthSmallest(t, 3))
 
-t = TreeNode(1)
-t.right = TreeNode(2)
-print(kthSmallest(t, 3))

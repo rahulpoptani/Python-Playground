@@ -17,11 +17,15 @@ Example 3:
 Input: nums = [3,3], target = 6
 Output: [0,1]
 '''
-
+from Common.Tags import ARRAY, SET
 from typing import List
 
 # Bruteforce
 def twoSum(nums: List[int], target: int) -> List[int]:
+    """
+    Time Complexity: O(n²) - Uses nested loops where for each element, we potentially iterate through all remaining elements
+    Space Complexity: O(1) - Only uses a constant amount of extra space for variables (toSearch, x, y)
+    """
     for x in range(len(nums)):
         toSearch = target - nums[x]
         for y in range(x+1, len(nums)):

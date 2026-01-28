@@ -3,6 +3,8 @@ sys.path.append(os.path.abspath(os.curdir))
 from Node import Node
 from TreeUtils import print_tree_visual
 
+HASHES = 10
+
 #       4
 #     /   \
 #    2     6
@@ -25,10 +27,11 @@ def maxDepth(root: Node):
     rightHeight = maxDepth(root.right)
     return 1 + max(leftHeight, rightHeight)
 
+print("#"*HASHES + " Max Height " + "#"*HASHES)
+print_tree_visual(root)
 print(f'Max Height: {maxDepth(root)}')
 
 # Balanced Binary Tree (Difference in Height of Left Sub Tree and Right Sub Tree should be atmost 1)
-
 #        1
 #       /  \
 #      3    2
@@ -47,36 +50,51 @@ IBroot.left.left.left = Node(7)
 IBroot.left.left.right = Node(6)
 
 def isBalancedBT(root):
-    if not root: return 0
-    leftHeight = maxDepth(root.left)
-    rightHeight = maxDepth(root.right)
-    if leftHeight == -1 or rightHeight == -1: return -1
-    if (abs(leftHeight - rightHeight) > 1): return -1
-    return 1 + max(leftHeight, rightHeight)
+    def checkHeight(node):
+        if not node: 
+            return 0
+        
+        leftHeight = checkHeight(node.left)
+        if leftHeight == -1:
+            return -1
+        
+        rightHeight = checkHeight(node.right)
+        if rightHeight == -1:
+            return -1
+        
+        if abs(leftHeight - rightHeight) > 1:
+            return -1
+        
+        return 1 + max(leftHeight, rightHeight)  
+    return checkHeight(root) != -1
 
+print("#"*HASHES + " Balanced BT " + "#"*HASHES)
+print_tree_visual(IBroot)
 print(f'Balanced BT: {isBalancedBT(IBroot)}')
 
 # Sum of all nodes
 def sumTree(root: Node):
-    if root == None: return 0
-    return root.data + sumTree(root.left) + sumTree(root.right)
+    if not root: return 0
+    return root.value + sumTree(root.left) + sumTree(root.right)
 
+print("#"*HASHES + " Sum of all Nodes " + "#"*HASHES)
 print(f'Sum of all nodes: {sumTree(root)}')
 
 # Minimum Value in Binary Tree
 def minValue(root: Node):
     stack = [root]
-    minvalue = root.data
+    minvalue = root.value
     while stack:
         current = stack.pop()
         if current.right:
             stack.append(current.right)
-            minvalue = min(minvalue, current.right.data)
+            minvalue = min(minvalue, current.right.value)
         if current.left:
             stack.append(current.left)
-            minvalue = min(minvalue, current.left.data)
+            minvalue = min(minvalue, current.left.value)
     return minvalue
 
+print("#"*HASHES + " Minimum value in BT " + "#"*HASHES)
 print(f'MinValue in Tree: {minValue(root)}')
 
 # Diameter of Binary Tree
@@ -110,6 +128,8 @@ def diameter(root, temp):
     temp[0] = max(temp[0], leftHeight + rightHeight)
     return 1 + max(leftHeight, rightHeight)
 
+print("#"*HASHES + " Diameter in BT " + "#"*HASHES)
+print_tree_visual(root1)
 print(f'MaxHeight: {diameter(root1,temp)} with diameter: {temp[0]}')
 
 # Max Path Sum - Hint: Ignore negative path sum
@@ -119,9 +139,11 @@ def maxPathSum(root, temp):
     if not root: return 0
     leftSum = max(0, maxPathSum(root.left, temp))
     rightSum = max(0, maxPathSum(root.right, temp))
-    temp[0] = max(temp[0], leftSum + rightSum + root.data)
-    return max(leftSum, rightSum) + root.data
+    temp[0] = max(temp[0], leftSum + rightSum + root.value)
+    return max(leftSum, rightSum) + root.value
 
+print("#"*HASHES + " Max Path Sum " + "#"*HASHES)
+print_tree_visual(root)
 maxPathSum(root,temp)
 print(f'MaxPathSum: {temp[0]}')
 
@@ -130,11 +152,12 @@ def identicalBT(root1, root2):
     if not root1 and not root2:
         return True
     if root1 and root2:
-        return (root1.data == root2.data
+        return (root1.value == root2.value
                 and identicalBT(root1.left, root2.left)
                 and identicalBT(root1.right, root2.right))
     return False
 
+print("#"*HASHES + " Identical Tree " + "#"*HASHES)
 print(f'Identical Tree: {identicalBT(root, root)}')
 print(f'Identical Tree: {identicalBT(root, root1)}')
 
@@ -144,6 +167,7 @@ def invertTree(root):
     root.left, root.right = invertTree(root.right), invertTree(root.left)
     return root
 
+print("#"*HASHES + " Invert Binary Tree " + "#"*HASHES)
 invertTree(root)
 print('Inverted Tree')
 print_tree_visual(root)
@@ -152,7 +176,7 @@ print_tree_visual(root)
 def are_symmetric(root1: Node, root2: Node):
     if root1 is None and root2 is None: 
         return True
-    elif ((root1 is None) != (root2 is None)) or root1.data != root2.data: 
+    elif ((root1 is None) != (root2 is None)) or root1.value != root2.value: 
         return False
     else: 
         return are_symmetric(root1.left,root2.right) and are_symmetric(root1.right,root2.left)

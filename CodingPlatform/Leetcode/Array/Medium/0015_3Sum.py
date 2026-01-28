@@ -24,7 +24,7 @@ Output: [[0,0,0]]
 Explanation: The only possible triplet sums up to 0.
 
 '''
-
+from Common.Tags import ARRAY, TWO_POINTER
 from typing import List
 
 def threeSum(nums: List[int]) -> List[List[int]]:
@@ -46,7 +46,7 @@ def threeSum(nums: List[int]) -> List[List[int]]:
             if total < 0:
                 left += 1
             elif total > 0:
-                rigsht -= 1
+                right -= 1
             else:
                 res.append([nums[i], nums[left], nums[right]])
                 while left < right and nums[left] == nums[left+1]:

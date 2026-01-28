@@ -21,6 +21,7 @@ Output: 2
 import os, sys
 sys.path.append(os.path.abspath(os.curdir))
 from DataStructures.Tree.TreeUtils import print_tree_visual
+from Common.Tags import GRIND_75
 
 class TreeNode:
     def __init__(self, x):
@@ -53,3 +54,15 @@ print('LCA of 3 and 4 =>', lowestCommonAncestor(root, TreeNode(3), TreeNode(4)).
 print('LCA of 5 and 0 =>', lowestCommonAncestor(root, TreeNode(5), TreeNode(0)).value)
 
 print_tree_visual(root)
+
+def lowestCommonAncestor(root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    if not root or not p or not q: return None
+    if (max(p.value, q.value) < root.value):
+        return lowestCommonAncestor(root.left, p, q)
+    elif (min(p.value, q.value) > root.value):
+        return lowestCommonAncestor(root.right, p, q)
+    return root
+
+print('LCA of 2 and 8 =>', lowestCommonAncestor(root, TreeNode(2), TreeNode(8)).value)
+print('LCA of 3 and 4 =>', lowestCommonAncestor(root, TreeNode(3), TreeNode(4)).value)
+print('LCA of 5 and 0 =>', lowestCommonAncestor(root, TreeNode(5), TreeNode(0)).value)

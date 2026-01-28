@@ -21,15 +21,16 @@ Explanation: There is no consecutive sequence, so the length will be 0.
 from typing import List
 
 def longestConsecutive(nums: List[int]) -> int:
-    nums = set(nums)
-    best = 0
-    for x in nums:
-        if x - 1 not in nums:
-            y = x + 1
-            while y in nums:
-                y += 1
-            best = max(best, y - x)
-    return best
+    res = 0
+    store = set(nums)
+
+    for num in nums:
+        streak, curr = 0, num
+        while curr in store:
+            streak += 1
+            curr += 1
+        res = max(res, streak)
+    return res
 
 print(longestConsecutive(nums = [100,4,200,1,3,2]))
 print(longestConsecutive(nums = [0,3,7,2,5,8,4,6,0,1]))
