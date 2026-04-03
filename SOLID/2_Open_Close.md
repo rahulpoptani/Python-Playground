@@ -74,4 +74,4 @@ print(vip_discount.calculate(1000))      # Output: 100.0
 1. Avoid modifying existing code when adding new behavior.
 2. Use abstraction (via base classes or interfaces).
 3. Apply polymorphism to allow new implementations without changing existing logic.
-4. Helps in writing scalable, maintainable, and robust code.ss
+4. Helps in writing scalable, maintainable, and robust code.

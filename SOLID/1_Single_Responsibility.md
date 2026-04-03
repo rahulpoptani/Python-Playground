@@ -27,7 +27,9 @@ class FileManager:
             archive.extractall()
 ```
 
-In this example, your FileManager class has two different responsibilities. It uses the .read() and .write() methods to manage the file. It also deals with ZIP archives by providing the .compress() and .decompress() methods.
+In this example, your **FileManager** class has two different responsibilities. 
+1. It uses the .read() and .write() methods to manage the file. 
+2. It also deals with ZIP archives by providing the .compress() and .decompress() methods.
 
 This class violates the single-responsibility principle because it has two reasons for changing its internal implementation. To fix this issue and make your design more robust, you can split the class into two smaller, more focused classes, each with its own specific concern:
 
@@ -58,4 +60,8 @@ class ZipFileManager:
             archive.extractall()
 ```
 
-Now you have two smaller classes, each having only a single responsibility. FileManager takes care of managing a file, while ZipFileManager handles the compression and decompression of a file using the ZIP format. These two classes are smaller, so they’re more manageable. They’re also easier to reason about, test, and debug.s
+Now you have two smaller classes, each having only a single responsibility. 
+1. FileManager takes care of managing a file, while 
+2. ZipFileManager handles the compression and decompression of a file using the ZIP format. 
+
+These two classes are smaller, so they’re more manageable. They’re also easier to reason about, test, and debug.

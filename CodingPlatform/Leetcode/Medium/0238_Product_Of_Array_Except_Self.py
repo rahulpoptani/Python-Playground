@@ -15,18 +15,20 @@ Output: [0,0,9,0,0]
 from typing import List
 
 def productExceptSelf(nums: List[int]) -> List[int]:
-    # Result with all Ones
-    res = [1] * len(nums)
-    # From Left -> Right, Insert Prefix in Result and Calculate Next Prefix
-    prefix = 1
-    for i in range(len(nums)):
-        res[i] = prefix
-        prefix *= nums[i]
-    # From Right -> Left, Multiply Postfix in Result and Calculate Next Postfix
-    postfix = 1
-    for i in range(len(nums)-1, -1, -1):
-        res[i] *= postfix
-        postfix *= nums[i]
+    prod, zero_cnt = 1, 0
+    for num in nums:
+        if num:
+            prod *= num
+        else:
+            zero_cnt +=  1
+    if zero_cnt > 1: return [0] * len(nums)
+
+    res = [0] * len(nums)
+    for i, c in enumerate(nums):
+        if zero_cnt: res[i] = 0 if c else prod
+        else: res[i] = prod // c
     return res
 
 print(productExceptSelf([1, 2, 3, 4]))
+print(productExceptSelf([1, 2, 0, 4]))
+print(productExceptSelf([1, 2, 0, 0]))

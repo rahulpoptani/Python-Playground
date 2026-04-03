@@ -24,7 +24,7 @@ def longestConsecutive(nums: List[int]) -> int:
     res = 0
     store = set(nums)
 
-    for num in nums:
+    for num in store:
         streak, curr = 0, num
         while curr in store:
             streak += 1
