@@ -14,6 +14,7 @@ Input: prices = [7,6,4,3,1]
 Output: 0
 Explanation: In this case, no transactions are done and the max profit = 0.
 '''
+from Common.Tags import ARRAY, TWO_POINTER
 from typing import List
 
 def maxProfit(prices: List[int]) -> int:

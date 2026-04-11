@@ -19,11 +19,18 @@ Explanation: s is an empty string "" after removing non-alphanumeric characters.
 Since an empty string reads the same forward and backward, it is a palindrome.
 '''
 
+from Common.Tags import GRIND_75, TWO_POINTER, STRING
+
 def isPalindrome(s: str) -> bool:
-    newStr = ""
-    for c in s:
-        if c.isalnum(): newStr += c.lower()
-    return newStr == newStr[::-1]
+    l = 0
+    r = len(s) - 1
+    while l < r:
+        while l < r and not s[l].isalnum(): l += 1
+        while l < r and not s[r].isalnum(): r -= 1
+        if s[l].lower() != s[r].lower(): return False
+        l += 1
+        r -= 1
+    return True
 
 print(isPalindrome("A man, a plan, a canal: Panama"))
 print(isPalindrome("race a car"))

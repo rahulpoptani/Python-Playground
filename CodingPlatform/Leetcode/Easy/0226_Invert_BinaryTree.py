@@ -14,6 +14,7 @@ Input: root = []
 Output: []
 
 '''
+from Common.Tags import GRIND_75, TREE, BINARY_TREE, RECURSION
 
 import os, sys
 from typing import Optional
@@ -22,7 +23,7 @@ from DataStructures.Tree.TreeUtils import print_tree_visual
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
-        self.data = val
+        self.value = val
         self.left = left
         self.right = right
 

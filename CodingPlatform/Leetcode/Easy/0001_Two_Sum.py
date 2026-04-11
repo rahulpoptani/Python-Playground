@@ -1,4 +1,3 @@
-from Common.Tags import GRIND_75
 '''
 Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
@@ -17,7 +16,7 @@ Example 3:
 Input: nums = [3,3], target = 6
 Output: [0,1]
 '''
-from Common.Tags import ARRAY, SET
+from Common.Tags import GRIND_75, ARRAY, SET
 from typing import List
 
 # Bruteforce

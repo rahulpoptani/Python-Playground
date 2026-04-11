@@ -13,7 +13,7 @@ Example 3:
 Input: nums = [1,2,1,2,1,2,3,1,3,2], k = 2
 Output: [1,2]
 '''
-
+from Common.Tags import ARRAY, HASH
 from typing import List
 
 def topKFrequent(nums: List[int], k: int) -> List[int]:

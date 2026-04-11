@@ -1,16 +1,13 @@
 
 # Appraoch
 TWO_POINTER = None
+PREFIX_SUM = None
 SLIDING_WINDOW = None
 GREEDY = None
 DIVIDE_AND_CONQUER = None
 
 # Platform
 GRIND_75 = None
-
-# Question Type
-ARRAY_ROTATION = None
-MERGE_ARRAY = None
 
 # Data Structure
 ARRAY = None
@@ -24,6 +21,7 @@ QUEUE = None
 HEAP = None
 GRAPH = None
 HASH = None
+MATRIX = None
 
 # Design Pattern
 CREATIONAL_FACTORY = None
@@ -32,3 +30,7 @@ BEHAVIORAL_OBSERVER = None
 
 # Problem Type
 RECURSION = None
+BINARY_SEARCH = None
+BFS = None
+DFS = None
+DYNAMIC_PROGRAMMING = None

@@ -13,6 +13,8 @@ Output: -1
 Explanation: 2 does not exist in nums so return -1
 '''
 
+from Common.Tags import GRIND_75, ARRAY, BINARY_SEARCH
+
 from typing import List
 
 def search(nums: List[int], target: int) -> int:
