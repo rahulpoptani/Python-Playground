@@ -8,3 +8,4 @@ include/*
 *.cfg
 .venv
 Test.py
+.codex

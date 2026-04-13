@@ -10,7 +10,7 @@ Input: s = "rat", t = "car"
 Output: false
 '''
 
-from Common.Tags import GRIND_75, STRING, HASH
+from Common.Tags import GRIND_75, STRING, HASHMAP
 
 def isAnagram(s: str, t: str) -> bool:
     if len(s) != len(t): return False

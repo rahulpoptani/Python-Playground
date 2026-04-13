@@ -5,6 +5,7 @@ PREFIX_SUM = None
 SLIDING_WINDOW = None
 GREEDY = None
 DIVIDE_AND_CONQUER = None
+DESIGN = None
 
 # Platform
 GRIND_75 = None
@@ -16,11 +17,12 @@ SET = None
 TREE = None
 BINARY_TREE = None
 LINKED_LIST = None
+DOUBLY_LINKED_LIST = None
 STACK = None
 QUEUE = None
 HEAP = None
 GRAPH = None
-HASH = None
+HASHMAP = None
 MATRIX = None
 
 # Design Pattern

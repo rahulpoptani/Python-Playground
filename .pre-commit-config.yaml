@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: check-common-tags-import
+        name: Check Common.Tags import
+        entry: python3 Common/check_missing_tags_import.py
+        language: system
+        types: [python]
+        files: ^CodingPlatform/.*\.py$

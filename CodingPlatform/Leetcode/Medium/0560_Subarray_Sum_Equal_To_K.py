@@ -12,7 +12,7 @@ Input: nums = [1,2,1,2,1], k = 3
 Output: 4
 
 '''
-from Common.Tags import ARRAY, HASH, PREFIX_SUM
+from Common.Tags import ARRAY, HASHMAP, PREFIX_SUM
 from typing import List
 
 def subarraySum(nums: List[int], k: int) -> int:
