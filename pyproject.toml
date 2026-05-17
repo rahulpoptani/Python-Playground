@@ -6,7 +6,19 @@ build-backend = "setuptools.build_meta"
 name = "python-playground"
 version = "0.1.0"
 description = "Python algorithms, data structures, and coding practice"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
+dependencies = [
+    "cfgv==3.5.0",
+    "distlib==0.4.0",
+    "filelock==3.25.2",
+    "identify==2.6.18",
+    "nodeenv==1.10.0",
+    "platformdirs==4.9.6",
+    "pre-commit==4.5.1",
+    "python-discovery==1.2.2",
+    "pyyaml==6.0.3",
+    "virtualenv==21.2.1",
+]
 
 [tool.setuptools.packages.find]
 include = ["Common*", "CodingPlatform*", "DataStructures*", "Design_Patterns*"]

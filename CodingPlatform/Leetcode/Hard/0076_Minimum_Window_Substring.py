@@ -21,29 +21,41 @@ Explanation: Both 'a's from t must be included in the window.
 Since the largest window of s only has one 'a', return empty string. 
 '''
 
+from Common.Tags import STRING, HASHMAP, SLIDING_WINDOW
+from collections import Counter
+
 def minWindow(s: str, t: str) -> str:
-    if t == "": return ""
+    if not t or not s:
+        return ""
 
-    countT, window = {}, {}
-
-    # create a map and store the occurrence of the target string
-    for c in t:
-        countT[c] = 1 + countT.get(c, 0)
+    need = Counter(t)
+    have, required = 0, len(need)  # distinct chars that need to be satisfied
     
-    have, need = 0, len(countT)
-    res, resLen = [-1, -1], float("infinity")
-
+    window = {}
+    best = ""
     l = 0
-    for r in range(len(s)):
-        # current character
-        c = s[r]
-        window[c] = 1 + window.get(c, 0)
 
-        if c in countT and window[c] == countT[c]:
+    for r, c in enumerate(s):
+        window[c] = window.get(c, 0) + 1
+        
+        # Did this addition satisfy a character's requirement?
+        if c in need and window[c] == need[c]:
             have += 1
+        
+        # Shrink from left while window is valid
+        while have == required:
+            # Update best
+            if not best or (r - l + 1) < len(best):
+                best = s[l:r+1]
+            
+            # Remove leftmost char
+            window[s[l]] -= 1
+            if s[l] in need and window[s[l]] < need[s[l]]:
+                have -= 1
+            l += 1
 
-
-    
+    return best
 
 print(minWindow(s = "ADOBECODEBANC", t = "ABC"))
 print(float("infinity"))
+

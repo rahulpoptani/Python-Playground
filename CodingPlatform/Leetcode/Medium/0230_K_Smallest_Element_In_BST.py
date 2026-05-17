@@ -11,6 +11,7 @@ Output: 3
 from typing import Optional
 from DataStructures.Tree.TreeUtils import print_tree_visual
 from Common.Util import separator
+from Common.Tags import BINARY_TREE, DFS
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):

@@ -20,6 +20,7 @@ Input: prices = [7,6,4,3,1]
 Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
 '''
+from Common.Tags import ARRAY, SLIDING_WINDOW, DYNAMIC_PROGRAMMING
 from typing import List
 
 def maxProfit(prices: List[int]) -> int:
@@ -27,19 +28,22 @@ def maxProfit(prices: List[int]) -> int:
     right = 1
     max_profit = 0
     res = []
+    
     for right in range(1, len(prices)):
         if prices[right] >= prices[left]:
             right += 1
             continue
         else:
-            if len(prices[left:right]) > 1: res.append(prices[left:right])
+            if len(prices[left:right]) > 1: 
+                res.append(prices[left:right])
             left = right
             right += 1
-    if len(prices[left:right]) > 1: res.append(prices[left:right])
-    print(res)
+    if len(prices[left:right]) > 1: 
+        res.append(prices[left:right])
+    
     res = sorted(list(map(lambda x: x[-1] - x[0], res)), reverse=True)
-    print(res, res[:2])
     max_profit = sum(res[:2])
+    
     return max_profit
 
 

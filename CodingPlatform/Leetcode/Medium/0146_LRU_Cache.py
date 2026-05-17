@@ -30,6 +30,10 @@ lRUCache.get(4);    // return 4
 
 from Common.Tags import DESIGN, DOUBLY_LINKED_LIST, HASHMAP
 
+class Node:
+    def __init__(self, key, val):
+        self.key, self.val = key, val
+        self.prev = self.next = None
 class LRUCache:
     def __init__(self, capacity: int):
         self.cap = capacity
@@ -50,14 +54,14 @@ class LRUCache:
 
     def put(self, key: int, value: int) -> None:
         if key in self.map:
-            self._remove(self.map[key])
+            self._remove(self.map[key]) # remove old node before reinserting updated node at head
         node = Node(key, value)
         self.map[key] = node
         self._insert_at_head(node)
         if len(self.map) > self.cap:
-            lru = self.tail.prev   # node just before tail sentinel
-            self._remove(lru)
-            del self.map[lru.key]
+            lru_node = self.tail.prev   # node just before tail sentinel
+            self._remove(lru_node)
+            del self.map[lru_node.key]
 
     def _remove(self, node):
         node.prev.next = node.next
@@ -69,10 +73,6 @@ class LRUCache:
         self.head.next.prev = node
         self.head.next = node
 
-class Node:
-    def __init__(self, key, val):
-        self.key, self.val = key, val
-        self.prev = self.next = None
 
 # test cases
 lRUCache = LRUCache(2)

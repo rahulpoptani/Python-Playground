@@ -6,6 +6,7 @@ SLIDING_WINDOW = None
 GREEDY = None
 DIVIDE_AND_CONQUER = None
 DESIGN = None
+SIMULATION = None
 
 # Platform
 GRIND_75 = None
@@ -14,7 +15,6 @@ GRIND_75 = None
 ARRAY = None
 STRING = None
 SET = None
-TREE = None
 BINARY_TREE = None
 LINKED_LIST = None
 DOUBLY_LINKED_LIST = None

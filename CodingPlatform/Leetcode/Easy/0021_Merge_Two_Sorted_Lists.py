@@ -16,6 +16,7 @@ Input: list1 = [], list2 = [0]
 Output: [0]
 '''
 
+from Common.Tags import GRIND_75, LINKED_LIST
 from typing import Optional
 
 # Definition for singly-linked list.
@@ -41,7 +42,7 @@ def mergeTwoLists(list1: Optional[ListNode], list2: Optional[ListNode]) -> Optio
         tail = tail.next
     if list1:
         tail.next = list1
-    elif list2:
+    else:
         tail.next = list2
     return dummy.next
 

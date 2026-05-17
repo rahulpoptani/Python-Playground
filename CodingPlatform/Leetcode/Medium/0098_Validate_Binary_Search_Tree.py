@@ -15,7 +15,7 @@ Input: root = [5,1,4,null,null,3,6]
 Output: false
 Explanation: The root node's value is 5 but its right child's value is 4.
 '''
-
+from Common.Tags import BINARY_TREE, DFS
 from typing import Optional
 from DataStructures.Tree.Node import Node
 from DataStructures.Tree.TreeUtils import print_tree_visual

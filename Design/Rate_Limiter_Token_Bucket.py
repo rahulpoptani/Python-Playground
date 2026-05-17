@@ -11,7 +11,8 @@ def refill():
             TOKEN += 1
             print(f"[refill]  TOKEN = {TOKEN}")
 
-threading.Thread(target=refill, daemon=True).start()
+t1 = threading.Thread(target=refill, daemon=True)
+t1.start()
 
 while True:
     key = input()
