@@ -16,7 +16,7 @@ Input: ransomNote = "aa", magazine = "aab"
 Output: true 
 '''
 
-from Common.Tags import GRIND_75, STRING, HASHMAP
+from Common.Tags import STRING, HASHMAP
 from collections import Counter
 
 def canConstruct(ransomNote: str, magazine: str) -> bool:

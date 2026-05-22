@@ -18,7 +18,7 @@ Input: head = [1], pos = -1
 Output: false
 Explanation: There is no cycle in the linked list.
 '''
-from Common.Tags import GRIND_75, LINKED_LIST, TWO_POINTER, HASHMAP
+from Common.Tags import LINKED_LIST, TWO_POINTER, HASHMAP
 
 from typing import Optional
 

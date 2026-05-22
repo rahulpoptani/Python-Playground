@@ -14,7 +14,7 @@ Input: root = []
 Output: true
 '''
 
-from Common.Tags import GRIND_75, RECURSION, BINARY_TREE
+from Common.Tags import RECURSION, BINARY_TREE
 from DataStructures.Tree.TreeUtils import print_tree_visual
 from typing import Optional
 

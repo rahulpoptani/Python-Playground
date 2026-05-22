@@ -19,7 +19,7 @@ Explanation: s is an empty string "" after removing non-alphanumeric characters.
 Since an empty string reads the same forward and backward, it is a palindrome.
 '''
 
-from Common.Tags import GRIND_75, TWO_POINTER, STRING
+from Common.Tags import TWO_POINTER, STRING
 
 def isPalindrome(s: str) -> bool:
     l = 0

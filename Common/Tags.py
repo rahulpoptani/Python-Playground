@@ -8,9 +8,6 @@ DIVIDE_AND_CONQUER = None
 DESIGN = None
 SIMULATION = None
 
-# Platform
-GRIND_75 = None
-
 # Data Structure
 ARRAY = None
 STRING = None

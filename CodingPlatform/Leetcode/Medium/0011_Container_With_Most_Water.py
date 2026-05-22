@@ -12,7 +12,7 @@ Example 2:
 Input: height = [1,1]
 Output: 1
 '''
-from Common.Tags import GRIND_75, ARRAY, TWO_POINTER
+from Common.Tags import ARRAY, TWO_POINTER
 from typing import List
 
 def maxArea(height: List[int]) -> int:

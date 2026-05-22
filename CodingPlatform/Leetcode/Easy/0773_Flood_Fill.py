@@ -15,7 +15,7 @@ Example 1:
 Input: image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, color = 2
 Output: [[2,2,2],[2,2,0],[2,0,1]]
 '''
-from Common.Tags import GRIND_75, MATRIX, BFS
+from Common.Tags import MATRIX, BFS
 
 from typing import List
 from collections import deque

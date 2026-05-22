@@ -16,7 +16,7 @@ Input: list1 = [], list2 = [0]
 Output: [0]
 '''
 
-from Common.Tags import GRIND_75, LINKED_LIST
+from Common.Tags import LINKED_LIST
 from typing import Optional
 
 # Definition for singly-linked list.

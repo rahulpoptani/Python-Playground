@@ -24,7 +24,7 @@ Input: s = "([])"
 Output: true
 '''
 
-from Common.Tags import GRIND_75, STACK
+from Common.Tags import STACK
 
 def isValid(s: str) -> bool:
     stack = []
