@@ -21,6 +21,7 @@ HEAP = None
 GRAPH = None
 HASHMAP = None
 MATRIX = None
+BIT_MANIPULATION = None
 
 # Design Pattern
 CREATIONAL_FACTORY = None
