@@ -7,6 +7,7 @@ GREEDY = None
 DIVIDE_AND_CONQUER = None
 DESIGN = None
 SIMULATION = None
+MATH = None
 
 # Data Structure
 ARRAY = None
