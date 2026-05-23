@@ -17,14 +17,19 @@ from DataStructures.Tree.TreeUtils import print_tree_visual
 
 def isSubtree(root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
     def isIdenticalTree(root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
-        if not root1 and not root2: return True
+        if not root1 and not root2: 
+            return True
         if root1 and root2 and root1.value == root2.value:
             return isIdenticalTree(root1.left, root2.left) and isIdenticalTree(root1.right, root2.right)
         return False
     
-    if not subRoot: return True
-    if not root: return False
-    if isIdenticalTree(root, subRoot): return True
+    if not subRoot: 
+        return True
+    if not root: 
+        return False
+    if isIdenticalTree(root, subRoot): 
+        return True
+    
     return isSubtree(root.left, subRoot) or isSubtree(root.right, subRoot)
 
 root = TreeNode(3)
