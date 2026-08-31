@@ -8,6 +8,7 @@ DIVIDE_AND_CONQUER = None
 DESIGN = None
 SIMULATION = None
 MATH = None
+INTERVAL = None
 
 # Data Structure
 ARRAY = None

@@ -10,6 +10,7 @@ Input: s = "dvdf"
 Output: 3
 Explanation: The answer is "vdf", with the length of 3.
 '''
+from Common.Tags import STRING, SET, SLIDING_WINDOW
 
 
 def lengthOfLongestSubstring(s: str) -> int:
@@ -22,7 +23,7 @@ def lengthOfLongestSubstring(s: str) -> int:
             res.remove(s[left])
             left += 1
         res.add(s[right])
-        maxchar = max(maxchar, right - left + 1) # instead of right-left+1, we can also use len(res), but the time complexity to calculate the length would be an overhead:
+        maxchar = max(maxchar, right - left + 1) # instead of right-left+1, we can also use len(res), same time complexity
     
     return maxchar
 
