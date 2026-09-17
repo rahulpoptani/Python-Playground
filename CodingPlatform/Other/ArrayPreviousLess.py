@@ -6,6 +6,8 @@ For items = [3, 5, 2, 4, 5], the output should be
 solution(items) = [-1, 3, -1, 2, 4].
 '''
 
+from Common.Tags import ARRAY, MONOTONIC_STACK
+
 def solution(items):
     # Using stack for O(n) time complexity
     result = []

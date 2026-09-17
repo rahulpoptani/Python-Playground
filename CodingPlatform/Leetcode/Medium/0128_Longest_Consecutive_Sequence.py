@@ -19,6 +19,7 @@ Explanation: There is no consecutive sequence, so the length will be 0.
 '''
 
 from typing import List
+from Common.Tags import ARRAY, SET
 
 def longestConsecutive(nums: List[int]) -> int:
     res = 0

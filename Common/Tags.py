@@ -9,6 +9,9 @@ DESIGN = None
 SIMULATION = None
 MATH = None
 INTERVAL = None
+SORTING = None
+BACKTRACKING = None
+QUICKSELECT = None
 
 # Data Structure
 ARRAY = None
@@ -18,6 +21,7 @@ BINARY_TREE = None
 LINKED_LIST = None
 DOUBLY_LINKED_LIST = None
 STACK = None
+MONOTONIC_STACK = None
 QUEUE = None
 HEAP = None
 GRAPH = None

@@ -17,6 +17,8 @@ Output: 7
 Description: This case verifies how the function handles sentences with irregular spacing, including leading and trailing spaces.
 '''
 
+from Common.Tags import STRING
+
 def count_words(sentence):
     """ 
     :type sentence: str

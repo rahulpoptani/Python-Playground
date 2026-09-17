@@ -18,6 +18,7 @@ Explanation: The answer [[-2,4],[3,3]] would also be accepted.
 
 from typing import List
 import heapq
+from Common.Tags import ARRAY, HEAP
 
 def kClosest(points: List[List[int]], k: int) -> List[List[int]]:
     minHeap = []

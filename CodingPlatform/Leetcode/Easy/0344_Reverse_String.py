@@ -12,6 +12,7 @@ Output: ["h","a","n","n","a","H"]
 '''
 
 from typing import List
+from Common.Tags import ARRAY, STRING, TWO_POINTER
 
 def reverseString(s: List[str]) -> None:
     left = 0

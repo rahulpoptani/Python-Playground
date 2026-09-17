@@ -18,6 +18,8 @@ Output: -2147483648
 Since -91283472332 is less than the lower bound of the range [-2 (power 31), 2 (power 31) - 1], the final result is clamped to -231 = -2147483648.
 '''
 
+from Common.Tags import STRING
+
 def myAtoi(s: str) -> int:
     str = s.strip()
     negative = False

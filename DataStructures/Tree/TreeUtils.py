@@ -15,7 +15,7 @@ def calculate_positions(node, level=0, position=0, positions=None):
     position, positions = calculate_positions(node.left, level + 1, position, positions)
     
     # Current node gets the next position
-    positions[id(node)] = (level, position, len(str(node.value)))
+    positions[id(node)] = (level, position, len(str(node.val)))
     position += 1
     
     # Process right subtree
@@ -29,7 +29,7 @@ def fill_tree_matrix(matrix, node, positions, col_offset):
         return
     
     level, col, width = positions[id(node)]
-    value_str = str(node.value)
+    value_str = str(node.val)
     
     # Place the value in the matrix
     actual_col = col * 2 + col_offset  # Add spacing between columns

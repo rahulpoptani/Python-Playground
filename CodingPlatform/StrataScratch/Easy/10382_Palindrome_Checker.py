@@ -17,6 +17,8 @@ Output: true
 Description: This case ensures that the function works correctly for a fully lowercase version of the palindrome without spaces or punctuation, thus requiring a proper check for character-by-character mirroring.
 '''
 
+from Common.Tags import STRING, TWO_POINTER
+
 def is_palindrome(s):
     """ 
     :type s: str

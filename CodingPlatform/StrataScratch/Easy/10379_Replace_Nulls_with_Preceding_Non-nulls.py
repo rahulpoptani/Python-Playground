@@ -17,6 +17,8 @@ Output: [null, null, 6, 6, 5, 5, 5, 2, 2, 3]
 Description: This test case checks the function"s ability to process lists starting with multiple null values and having non-null values scattered through the list.
 '''
 
+from Common.Tags import ARRAY
+
 def replace_null_values(lst):
     """ 
     :type lst: List[Union[int, None]]

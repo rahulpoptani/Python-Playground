@@ -27,6 +27,7 @@ Explanation: Only one voter, so their votes are used for the ranking.
 
 from typing import List
 from collections import defaultdict
+from Common.Tags import ARRAY, STRING, HASHMAP, SORTING
 
 def rankTeams(votes: List[str]) -> str:
     if not votes: return ""

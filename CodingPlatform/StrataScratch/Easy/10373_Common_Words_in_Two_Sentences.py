@@ -18,6 +18,7 @@ Description: This test verifies if the function can correctly identify common wo
 '''
 import re
 from collections import Counter
+from Common.Tags import STRING, HASHMAP
 
 def find_common_words(input):
     """ 

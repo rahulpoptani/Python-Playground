@@ -20,6 +20,7 @@ Output: true
 '''
 
 from typing import List
+from Common.Tags import MATRIX, BACKTRACKING
 
 def exist(board: List[List[str]], word: str) -> bool:
     ROWS, COLS = len(board), len(board[0])

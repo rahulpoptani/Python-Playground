@@ -18,6 +18,7 @@ Description: The function is tested with an empty string for one sentence and a 
 '''
 
 from collections import Counter
+from Common.Tags import STRING, HASHMAP
 
 def non_repeated_words(input):
     """

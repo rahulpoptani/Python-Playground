@@ -22,6 +22,7 @@ Output: 0
 Explanation: There is no way to make a positive profit, so we never buy the stock to achieve the maximum profit of 0.
 '''
 from typing import List
+from Common.Tags import ARRAY, GREEDY
 
 def maxProfit(prices: List[int]) -> int:
     maxProfit = 0

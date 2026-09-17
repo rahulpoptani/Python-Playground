@@ -17,6 +17,8 @@ Output: [9, "giraffe", 3]
 Description: This case evaluates the function"s performance with multiple entries where the maximum value is neither at the start nor the end of the dictionary.
 '''
 
+from Common.Tags import HASHMAP
+
 def find_max_value(dictionary):
     """ 
     :type dictionary: dict

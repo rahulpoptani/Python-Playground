@@ -20,6 +20,7 @@ Explanation: "anagram" and "mangaar" are anagrams.
 '''
 
 from collections import Counter
+from Common.Tags import STRING, HASHMAP
 
 def minSteps(s: str, t: str) -> int:
     count_s = Counter(s)

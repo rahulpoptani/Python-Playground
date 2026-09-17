@@ -17,7 +17,7 @@ Example 3:
 Input: root = [2,1], p = 2, q = 1
 Output: 2
 '''
-from Common.Tags import TREE
+from Common.Tags import BINARY_TREE, RECURSION
 import os, sys
 sys.path.append(os.path.abspath(os.curdir))
 from DataStructures.Tree.TreeUtils import print_tree_visual

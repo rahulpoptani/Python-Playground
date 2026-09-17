@@ -23,6 +23,7 @@ Output: ["g1 act car","a8 act zoo","ab1 off key dog","a1 9 2 3 1","zo4 4 7"]
 '''
 
 from typing import List
+from Common.Tags import ARRAY, STRING, SORTING
 def reorderLogFiles(logs: List[str]) -> List[str]:
     alpha, digit = [], []
 

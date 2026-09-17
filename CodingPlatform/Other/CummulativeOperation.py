@@ -1,4 +1,5 @@
 import itertools, operator
+from Common.Tags import ARRAY, PREFIX_SUM
 
 nums = [1,2,3,4,5]
 

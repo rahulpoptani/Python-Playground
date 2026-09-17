@@ -3,6 +3,8 @@
 What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 '''
 
+from Common.Tags import MATH
+
 def smallestMultiple(n):
     num = n
     while True:

@@ -15,6 +15,7 @@ Output: [2,3,6,7,1,5,4]
 
 
 from typing import Optional
+from Common.Tags import LINKED_LIST
 
 class ListNode:
     def __init__(self, val=0, next=None):

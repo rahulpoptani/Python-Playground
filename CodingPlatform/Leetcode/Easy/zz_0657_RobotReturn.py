@@ -15,6 +15,8 @@ Input: moves = "LL"
 Output: false
 '''
 
+from Common.Tags import STRING, SIMULATION
+
 # INCORRECT! Not handling corner case
 
 

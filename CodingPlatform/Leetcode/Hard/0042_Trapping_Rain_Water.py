@@ -11,6 +11,7 @@ Output: 9
 '''
 
 from typing import List
+from Common.Tags import ARRAY, TWO_POINTER
 
 # Two pointer approach
 def trap(height: List[int]) -> int:

@@ -12,6 +12,8 @@ solution(inputArray) = 186.
 We have [1, 2, 3, 4, 5, 6, 7, 8] -> [3, 7, 11, 15] -> [21, 165] -> [186], so the answer is 186.
 '''
 
+from Common.Tags import ARRAY, SIMULATION
+
 def solution(inputArray):
     is_sum = True
     curr_arry = []

@@ -13,6 +13,7 @@ Input: nums = [1], queries = [[4,0]]
 Output: [0]
 '''
 from typing import List
+from Common.Tags import ARRAY, SIMULATION
 
 def sumEvenAfterQueries(nums: List[int], queries: List[List[int]]) -> List[int]:
     res = []

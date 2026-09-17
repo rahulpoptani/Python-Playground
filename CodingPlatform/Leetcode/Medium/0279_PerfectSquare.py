@@ -10,6 +10,8 @@ Output: 2
 Explanation: 13 = 4 + 9.
 '''
 
+from Common.Tags import MATH, DYNAMIC_PROGRAMMING
+
 def numSquares(n: int):
     dp = [n] * (n+1)
     dp[0] = 0

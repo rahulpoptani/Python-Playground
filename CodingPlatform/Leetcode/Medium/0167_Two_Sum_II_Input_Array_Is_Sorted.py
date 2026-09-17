@@ -21,6 +21,7 @@ Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We ret
 '''
 
 from typing import List
+from Common.Tags import ARRAY, TWO_POINTER
 
 def twoSum(numbers: List[int], target: int) -> List[int]:
     left = 0

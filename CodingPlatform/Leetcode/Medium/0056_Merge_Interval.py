@@ -13,6 +13,7 @@ Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 '''
 
 from typing import List
+from Common.Tags import ARRAY, INTERVAL, SORTING
 
 def merge(intervals: List[List[int]]) -> List[List[int]]:
     result = []

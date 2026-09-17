@@ -21,6 +21,7 @@ Explanation: The next greater element for each value of nums1 is as follows:
 '''
 
 from typing import List
+from Common.Tags import ARRAY, HASHMAP, MONOTONIC_STACK
 
 def nextGreaterElement(nums1: List[int], nums2: List[int]) -> List[int]:
     num1Idx = { n:i for i, n in enumerate(nums1) }

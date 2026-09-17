@@ -8,6 +8,8 @@
 
 # Approach 1 - Sort both the string and compare
 
+from Common.Tags import STRING, SORTING
+
 def isAnagram(s, t):
     if sorted(s) == sorted(t):
         return True

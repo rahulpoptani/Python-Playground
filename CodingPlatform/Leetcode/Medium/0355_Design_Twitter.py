@@ -50,7 +50,7 @@ class Twitter:
             # Advance to that user's next (older) tweet
             if idx > 0:
                 nidx = idx - 1
-                neg_time, tweet_id = user_tweets[idx]
+                neg_time, tweet_id = self.tweets[uid][nidx]
                 heapq.heappush(heap, (neg_time, tweet_id, uid, nidx))
 
         return feed

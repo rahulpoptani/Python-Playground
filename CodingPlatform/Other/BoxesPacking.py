@@ -11,6 +11,8 @@ For length = [3, 1, 2], width = [3, 1, 2], and height = [3, 2, 1], the output sh
 solution(length, width, height) = false.
 '''
 
+from Common.Tags import ARRAY, GREEDY, SORTING
+
 def solution(length, width, height):
     boxes = []
     for i in range(len(length)):                # O(n)

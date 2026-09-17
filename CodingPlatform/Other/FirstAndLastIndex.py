@@ -9,6 +9,8 @@ target = 5
 output: [2,6]
 '''
 
+from Common.Tags import ARRAY, BINARY_SEARCH
+
 def find_first_last(arr, target):
     if len(arr) == 0 or arr[0] > target or arr[-1] < target: return [-1,-1]
     start = findstart(arr,target)

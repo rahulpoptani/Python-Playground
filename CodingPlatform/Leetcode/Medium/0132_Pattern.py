@@ -12,6 +12,8 @@ Output: true
 Explanation: There are three 132 patterns in the sequence: [-1, 3, 2], [-1, 3, 0] and [-1, 2, 0].
 '''
 
+from Common.Tags import ARRAY, MONOTONIC_STACK
+
 def find132Pattern(nums):
     stack = []
     curMin = nums[0]
