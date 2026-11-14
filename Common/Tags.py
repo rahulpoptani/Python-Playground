@@ -40,3 +40,6 @@ BINARY_SEARCH = None
 BFS = None
 DFS = None
 DYNAMIC_PROGRAMMING = None
+
+# Popular Tags
+BLIND75 = None

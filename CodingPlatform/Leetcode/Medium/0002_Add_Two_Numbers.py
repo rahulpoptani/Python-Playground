@@ -36,14 +36,14 @@ def addTwoNumbers(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[Li
     dummy = ListNode()
     current = dummy
     while l1 or l2 or carry:
-        sum = (l1.val if l1 else 0) + (l2.val if l2 else 0) + carry
-        carry = sum // 10
-        current.next = ListNode(sum % 10)
+        total = (l1.val if l1 else 0) + (l2.val if l2 else 0) + carry
+        carry = total // 10
+        current.next = ListNode(total % 10)
         current = current.next
         l1 = l1.next if l1 else None
         l2 = l2.next if l2 else None
     return dummy.next
 
-addTwoNumbers(ListNode(2, ListNode(4, ListNode(3))), ListNode(5, ListNode(6, ListNode(4)))).print()
+addTwoNumbers(ListNode(7, ListNode(2, ListNode(4, ListNode(3)))), ListNode(5, ListNode(6, ListNode(4)))).print()
 addTwoNumbers(ListNode(0), ListNode(0)).print()
 addTwoNumbers(ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9))))))), ListNode(9, ListNode(9, ListNode(9, ListNode(9))))).print()

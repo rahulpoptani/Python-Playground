@@ -20,7 +20,7 @@ Output: [["a"]]
 
 from typing import List
 from collections import defaultdict
-from Common.Tags import ARRAY, STRING, HASHMAP
+from Common.Tags import ARRAY, STRING, HASHMAP, BLIND75
 
 def groupAnagrams(strs: List[str]) -> List[List[str]]:
     groups = defaultdict(list)

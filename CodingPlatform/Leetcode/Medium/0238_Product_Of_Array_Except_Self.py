@@ -26,10 +26,11 @@ def productExceptSelf(nums: List[int]) -> List[int]:
 
     res = [0] * len(nums)
     for i, c in enumerate(nums):
-        if zero_cnt: res[i] = 0 if c else prod
-        else: res[i] = prod // c
+        if zero_cnt: 
+            res[i] = 0 if c else prod
+        else: 
+            res[i] = prod // c
     return res
 
 print(productExceptSelf([1, 2, 3, 4]))
-print(productExceptSelf([1, 2, 0, 4]))
-print(productExceptSelf([1, 2, 0, 0]))
+print(productExceptSelf([-1,1,0,-3,3]))
